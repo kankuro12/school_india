@@ -24,8 +24,10 @@ class StudentController extends Controller
                     throw new \Exception("Email Already Used in account", 1);
                 }
             }
-            if (Student::where('no', $r->no)->count() > 0) {
-                throw new \Exception("Student With Registration No - {$r->no} already Exists.");
+            if ($r->filled('no')) {
+                if (Student::where('no', $r->no)->count() > 0) {
+                    throw new \Exception("Student With Registration No - {$r->no} already Exists.");
+                }
             }
             $s = new Student();
             $u = new User();
@@ -34,7 +36,9 @@ class StudentController extends Controller
 
             try {
                 //general Info of Student
-                $s->no = $r->no;
+                if($r->filled('no')){
+                    $s->no = $r->no;
+                }
                 $s->name = $r->name;
                 $s->email = $r->email;
                 $s->gender = $r->gender;

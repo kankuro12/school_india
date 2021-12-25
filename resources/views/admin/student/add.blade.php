@@ -48,7 +48,7 @@
                 @csrf
                 <div class="row">
                     <div class="col-md-12 card-title">
-                        General Info
+                        Admission Info
                     </div>
                     <div class="col-md-3">
                         
@@ -59,10 +59,7 @@
                             </script>
                         </select>
                     </div>
-                    <div class="col-md-3">
-                        <label for="no">Reg No</label>
-                        <input type="text" name="no" id="no" class="form-control" required >
-                    </div>
+                   
                     <div class="col-md-3">
                         
                         <label for="level_id"> <input  type="checkbox" value="1" class="no_change" data-id="level_id" > Level</label>
@@ -78,6 +75,16 @@
                         <select name="section_id" id="section_id" class="form-control">
                             
                         </select>
+                    </div>
+                    @if (env('manual_registration',0)==1)     
+                    <div class="col-md-3">
+                        <label for="no">Reg No</label>
+                        <input type="text" name="no" id="no" class="form-control" required >
+                    </div>
+                    @endif
+                    <div class="col-md-12 card-title">
+                        <hr>
+                        General Info
                     </div>
                     <div class="col-md-3">
                         <label for="name">Name</label>
@@ -111,7 +118,7 @@
                         <input  type="text" name="aadhar_no" id="aadhar_no" class="form-control">
                     </div>
                     <div class="col-md-3">
-                        <label for="religion_id"> <input type="checkbox" value="1" class="no_change" > Religion</label>
+                        <label for="religion_id"> Religion</label>
                         <select name="religion_id" id="religion_id" class="form-control">
                             <script>
                                 document.write(getOptions(data.religions));
@@ -143,22 +150,22 @@
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <label for="country">Country</label>
+                        <label for="country"><input type="checkbox" value="1" class="no_change" data-id="country" > Country</label>
                         <input list="data-country" type="text" name="country" id="country" class="form-control">
                     </div>
                     
                     
                     <div class="col-md-3">
-                        <label for="state">State</label>
+                        <label for="state"><input type="checkbox" value="1" class="no_change" data-id="state" > State</label>
                         <input list="data-state" type="text" name="state" id="state" class="form-control">
                     </div>
     
                     <div class="col-md-3">
-                        <label for="district">District</label>
+                        <label for="district"><input type="checkbox" value="1" class="no_change" data-id="district" > District</label>
                         <input list="data-district" type="text" name="district" id="district" class="form-control">
                     </div>
                     <div class="col-md-3">
-                        <label for="tehsil">Tehsil</label>
+                        <label for="tehsil"><input type="checkbox" value="1" class="no_change" data-id="tehsil" > Tehsil</label>
                         <input list="data-tehsil" type="text" name="tehsil" id="tehsil" class="form-control">
                     </div>
                     <div class="col-md-3">
@@ -166,7 +173,7 @@
                         <input type="text" name="block" id="block" class="form-control">
                     </div>
                     <div class="col-md-3">
-                        <label for="pin">Pin</label>
+                        <label for="pin"><input type="checkbox" value="1" class="no_change" data-id="pin" > Pin</label>
                         <input list="data-pin" type="text" name="pin" id="pin" class="form-control">
                     </div>
                    
@@ -347,7 +354,7 @@
                             </div>
                             <div class="col-md-3 is_mentally_chalanged">
                                 <label for="mentally_chalanged_per">Handicap Percentage</label>
-                                <input type="text" class="form-control" name="mentally_chalanged_per" id="mentally_chalanged_per">
+                                <input list="data-handicap" type="text" class="form-control" name="mentally_chalanged_per" id="mentally_chalanged_per">
                             </div>
                         </div>
                     </div>
@@ -362,7 +369,7 @@
                           
                             <div class="col-md-9 has_genetic_disorder">
                                 <label for="genetic_disorder">Gentic Disorder</label>
-                                <input type="text" class="form-control" name="genetic_disorder" id="genetic_disorder">
+                                <input list="data-genetic_disorder" type="text" class="form-control" name="genetic_disorder" id="genetic_disorder">
                             </div>
                             
                         </div>
@@ -441,6 +448,7 @@
 <script>
     state=false;
     var did=0;
+    var no_change_data=[];
     $(function () {
         $('#photo').dropify();
         $('#add-student').submit(function (e) {
@@ -480,15 +488,24 @@
                     fd=new FormData(document.getElementById('add-student'));
                     axios.post('{{route('admin.student.add')}}',fd)
                     .then((res)=>{
+                        checkDataList();
+                        storeNoChange();
                         document.getElementById('add-student').reset();
+                        updateNoChange();
+                        $('#documents').html('');
                         $('#add-student').unblock();
                         toastr.success("Student Added Successfully");
                         state=false;
+                        if($('#no').length>0){
+                            $('#no').focus();
+                        }else{
+                            $('#name').focus();
+                        }
 
                     })
                     .catch((err)=>{
                         $('#add-student').unblock();
-                        toastr.error("Cannot Add Student,"+res.response.data.message);
+                        toastr.error("Cannot Add Student,"+err.response.data.message);
                         state=false;
 
                     });
@@ -505,6 +522,50 @@
     function setGaurdian(type) {
         ( ['name','aadhar_no','phone','email','occupation']).forEach(element => {
             $('#gaurdian_'+element).val($('#'+type+"_"+element).val());
+        });
+    }
+
+    function storeNoChange(params) {
+        no_change_data=[];
+    
+        $('input.no_change').each( function (i  , ele) { 
+            if(ele.checked){
+                no_change_data[ele.dataset.id]=[$('#'+ele.dataset.id).val(),1];
+            }
+        });
+
+        $('span.no_change').each( function (i  , ele) { 
+            no_change_data[ele.dataset.id]=[$('#'+ele.dataset.id).val(),2];
+            
+        });
+        console.log(no_change_data);
+    }
+
+    function updateNoChange(params) {
+        for (const key in no_change_data) {
+            if (Object.hasOwnProperty.call(no_change_data, key)) {
+                const d = no_change_data[key];
+                if(d[1]==1){
+
+                    console.log("input[data-id='"+key+"']");
+                    $("input[data-id='"+key+"']")[0].checked=true;
+                }
+                $('#'+key).val(d[0]);
+
+            }
+        }
+    }
+    function checkDataList(){
+        $('input[list]').each( function (i  , ele) { 
+
+            const d=ele.value;
+            if(d!=""){
+                const list= $(ele).attr('list');
+                let obj = $('#'+list).find("option[value='" +d + "']");
+                    if(!(obj != null && obj.length > 0)){
+                        $('#'+list).append('<option value="'+d+'">'+d+'</option>');
+                    }
+            }
         });
     }
 

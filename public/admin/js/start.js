@@ -44,7 +44,7 @@ function renderDataList(name,list){
     html="<datalist id='data-"+name+"'>"
     list.forEach(ele => {
         
-        html+="<option value='"+ele+"'>'+ele+'</option>"
+        html+="<option value='"+ele+"'>"+ele+"</option>"
     });
     html+="</datalist>";
     document.write(html);
