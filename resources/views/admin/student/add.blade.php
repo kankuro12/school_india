@@ -82,6 +82,10 @@
                         <input type="text" name="no" id="no" class="form-control" required >
                     </div>
                     @endif
+                    <div class="col-md-3">
+                        <label for="rollno">Roll No</label>
+                        <input type="text" name="rollno" id="rollno" class="form-control" required >
+                    </div>
                     <div class="col-md-12 card-title">
                         <hr>
                         General Info

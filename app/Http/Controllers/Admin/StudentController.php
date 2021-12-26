@@ -121,6 +121,7 @@ class StudentController extends Controller
                 $s->save();
 
                 $reg->student_id = $s->id;
+                $reg->rollno = $s->rollno;
                 $reg->academic_year_id = $r->academic_year_id;
                 $reg->level_id = $r->level_id;
                 $reg->section_id = $r->section_id;
@@ -174,6 +175,21 @@ class StudentController extends Controller
             ');
             // dd($data);
             return view('admin.student.add', compact('data'));
+        }
+    }
+    public function index(Request $r){
+        if($r->getMethod()=="POST"){
+            $query="select s.id, s.name as s_name,".(env('manual_registration')==1?"s.no":"concat(r.id,'.',Right(concat('0000000000' , s.id) , 8))")." as admission_no,r.rollno,s.phone,s.dob,l.title l_name,s.gender from students s join student_registrations r on s.id=r.student_id join levels l on l.id=r.level_id where r.academic_year_id=? and r.level_id=? " . ($r->filled('s_id')?" and r.section_id=?":"");
+            // dd($query);
+            $data=DB::select( $query,$r->filled('s_id')?[$r->a_y_id,$r->l_id,$r->s_id]:[$r->a_y_id,$r->l_id]);
+            return response()->json([$data,$query]);
+        }else{
+            $data = DB::selectOne('select
+            (select GROUP_CONCAT(id,concat(":",title)) from levels) as levels,
+            (select GROUP_CONCAT(id,concat(":",title)) from academic_years where status=1 and is_open_for_admission=1) as academic_years,
+            (select GROUP_CONCAT(id,concat(":",level_id),concat(":",title)) from sections) as sections
+           ');
+           return view('admin.student.index',compact('data'));
         }
     }
 }

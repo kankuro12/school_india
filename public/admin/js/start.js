@@ -1,3 +1,4 @@
+const genders=["Male","Female","Other"];
 function getData(_data) {
     let d=[];
     for (const key in _data) {
@@ -69,4 +70,13 @@ function initSwitch(){
         });
         
     });
+}
+
+
+function block(ele) {
+    $(ele).block({ message: '<div class="spinner-grow text-primary" role="status"><span class="sr-only">Loading...</span></div>'});
+}
+
+function unblock(ele) {
+    $(ele).unblock();
 }

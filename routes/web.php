@@ -3,6 +3,8 @@
 use App\Http\Controllers\Admin\AcademicYearController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\EmployeeController;
+use App\Http\Controllers\Admin\ExamController;
+use App\Http\Controllers\Admin\ExamSubjectController;
 use App\Http\Controllers\Admin\LevelController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\SettingController;
@@ -33,7 +35,23 @@ Route::prefix('admin')->name('admin.')->group(function(){
     route::match(['GET','POST'],'email',[AuthController::class,'email'])->name('email');
     Route::prefix('student')->name('student.')->group(function(){
         Route::match(['get', 'post'], 'add',[StudentController::class,'add'])->name('add');
+        Route::match(['get', 'post'], 'update',[StudentController::class,'update'])->name('update');
         Route::match(['get', 'post'], '',[StudentController::class,'index'])->name('index');
+    });
+
+    Route::prefix('exam')->name('exam.')->group(function(){
+        Route::match(['get', 'post'], 'add',[ExamController::class,'add'])->name('add');
+        Route::match(['get', 'post'], 'update/{exam}',[ExamController::class,'update'])->name('update');
+        Route::post('delete',[ExamController::class,'delete'])->name('delete');
+        Route::match(['get', 'post'], 'info/{id}',[ExamController::class,'info'])->name('info');
+        Route::match(['get', 'post'], '',[ExamController::class,'index'])->name('index');
+        Route::prefix('subect')->name('subect.')->group(function(){
+            Route::match(['get', 'post'], 'add/{exam}',[ExamSubjectController::class,'add'])->name('add');
+            Route::match(['get', 'post'], 'update/{exam}',[ExamSubjectController::class,'update'])->name('update');
+            Route::post('delete',[ExamSubjectController::class,'delete'])->name('delete');
+            Route::match(['get', 'post'], 'info/{id}',[ExamSubjectController::class,'info'])->name('info');
+            Route::match(['get', 'post'], 'setup/{exam}',[ExamSubjectController::class,'index'])->name('index');
+        });
     });
     Route::prefix('setting')->name('setting.')->group(function(){
         Route::match(['GET','POST'],'caste',[SettingController::class,'caste'])->name('caste');

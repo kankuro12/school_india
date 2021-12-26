@@ -12,6 +12,17 @@
             </li>
 
             <li >
+                <a href="#"><i class="material-icons">settings</i>Student<i class="material-icons has-sub-menu">add</i></a>
+                <ul class="sub-menu">
+                    <li class="sub-item">
+                        <a  href="{{route('admin.student.index')}}" >List</a>
+                    </li>
+                    <li class="sub-item">
+                        <a  href="{{route('admin.student.add')}}" >Add New</a>
+                    </li>
+                </ul>
+            </li>
+            <li >
                 <a href="#"><i class="material-icons">supervisor_account</i>HR<i class="material-icons has-sub-menu">add</i></a>
                 <ul class="sub-menu">
                     {{-- {{-- <li class="sub-item">
