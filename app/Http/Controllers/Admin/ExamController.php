@@ -55,6 +55,7 @@ class ExamController extends Controller
 
     public function info(Request $request,$id)
     {
+        
         $exam = DB::table('exams')->join('academic_years', 'academic_years.id', '=', 'exams.academic_year_id')
             ->select(DB::raw('exams.id,exams.name,exams.start,exams.end,academic_years.title as ac'))->where('exams.id',$id)->first();
             // dd($exam);

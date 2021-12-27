@@ -9,9 +9,25 @@
         margin-right:5px;
     }
 
-    .form-control{
-        padding: 0.375rem 0.75rem !important;
+    .table td, .table th {
+        padding: 5px !important;
     }
+
+    .w-15{
+        width: 15%;
+    }
+    .w-25{
+        width: 30%;
+    }
+    .w-45{
+        width: 45%;
+    }
+    table tr:first-child th{
+        border:none !important;
+    }
+    /* .form-control{
+        padding: 0.375rem 0.75rem !important;
+    } */
 </style>
 @endsection
 @section('page-option')
@@ -33,11 +49,11 @@
         data=getData(_data);
         
     </script>
-
+    @include('admin.exam.setup.template')
   
-    <div class="card shadow mb-3">
+    <div class="card shadow mb-4">
         <div class="card-body">
-           <form action="{{route('admin.student.add')}}" id="add-student" method="post" enctype="multipart/form-data"
+           <form action="#" id="load-subject" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <div class="col-md-6">
@@ -57,14 +73,18 @@
                         </select>
                     </div>
                     <div class="col-md-12 py-2 text-right">
-                        <button class="btn btn-primary">Load Subjects</button>
+                        <button class="btn btn-primary" id="load-subject-btn">Load Subjects</button>
+                        <span class="btn btn-danger d-none" id="reset-subject-btn" onclick="resetData()">reset Subjects</button>
                     </div>
                 </div>
             </form>
         </div>
     </div>
 
-    
+    @include('admin.exam.setup.part')
+
+   
+
 @endsection
 @section('script')
 <script src="{{asset('admin/plugins/drophify/js/dropify.min.js')}}"></script>
@@ -72,130 +92,141 @@
     state=false;
     var did=0;
     var no_change_data=[];
-    $(function () {
-        $('#photo').dropify();
-        $('#add-student').submit(function (e) {
-            e.preventDefault();
-            checkEmail(e);
+    function  switchHolder(on) {
+        if(on){
+            $('#add-subject-holder').removeClass('d-none');
+            $('#subjects-table-holder').removeClass('d-none');
+            $('#load-subject-btn').addClass('d-none');
+            $('#reset-subject-btn').removeClass('d-none');
+            $('#level_id').attr('readonly', '');
+            $('#section_id').attr('readonly', '');
+            $('#use-section').attr('readonly', '');
+        }else{
+            $('#add-subject-holder').addClass('d-none');
+            $('#subjects-table-holder').addClass('d-none');
+            $('#load-subject-btn').removeClass('d-none');
+            $('#reset-subject-btn').addClass('d-none');
+            $('#level_id').removeAttr('readonly');
+            $('#section_id').removeAttr('readonly');
+            $('#use-section').removeAttr('readonly');
+
+        }
+    }
+    function  addData(name) {
+        // console.log($('#data-template').html());
+        _html=$('#data-template').html();
+        html=_html.replaceAll('xxx',did.toString());
+        $('#marks-distribution').append(html);
+        if(name!=null && name!=undefined){
+            $('#name_'+did).val(name);
+        }
+        did+=1;
+    }
+    function delData(id) {
+        $('#data_'+id).remove();
+    }
+
+    function resetData(){
+        $('#marks-distribution').html('');
+        switchHolder(false);
+    }
+    function saveData(){
+        let fd=new FormData(document.getElementById('add-subject'));
+        fd.append('level_id',$('#level_id').val());
+        if(document.getElementById('use-section').checked){
+            fd.append('section_id',$('#section_id').val());
+        }
+        axios.post('{{route('admin.exam.subject.add',['exam'=>$exam->id])}}',fd)
+        .then((res)=>{
+            console.log(res.data);
+            renderData(res.data);
+            $('#marks-distribution').html('');
+            $('#add-subject')[0].reset();
+            toastr.success('Subject Added Sucessfully');
+        })
+        .catch((err)=>{
+            console.log(err.response.data);
+            toastr.success('Subject Not Added, '+err.response.data.message);
+
         });
-        initSwitch();
+    }
+
+    $(function () {
+        // $('#photo').dropify();
+        $('#load-subject').submit(function (e) {
+            e.preventDefault();
+            loadData(e);
+        });
+        $('#add-subject').submit(function (e) {
+            e.preventDefault();
+            saveData();
+        });
+        // initSwitch();
         selectSection(1);
+        switchHolder(false);
     });
 
-    function  addDocument(params) {
-            html='<div id="doc-'+did+'" class="col-md-4  mb-3"><div class="shadow p-2"><input type="hidden" name="docs[]" value="'+did+'"/>'+
-                '<div><input type="file" accept="image/*" id="doc_image_'+did+'" name="doc_image_'+did+'" reuired/></div>'+
-                '<div class="mt-2"><label class="w-100 d-block d-flex justify-content-between align-items-center">'+
-                '<span>Document Name</span>'+
-                '<span class="btn btn-danger btn-sm" onclick="removeDoc('+did+')"> Remove</span>'+
-                '</label><input class="form-control" type="text" id="doc_name_'+did+'" name="doc_name_'+did+'" required /></div>'+
-                '</div></div>';
-            $('#documents').append(html);
-            $("#doc_image_"+did).dropify();
-            did+=1;
-    }   
+    function renderData(subject){
+        try {
+            _html=$('#subject-template').html();
+            html=_html.replaceAll('xxx_tr','tr');
+            html=html.replaceAll('xxx_td','td');
+            html=html.replaceAll('xxx_th','th');
+            html=html.replaceAll('xxx_id',subject.id);
+            html=html.replaceAll('xxx_sub',subject.name);
+            html=html.replaceAll('xxx_code',subject.code);
+            html=html.replaceAll('xxx_marks','<strong class="mr-2">FM:</strong>'+subject.fm+'<hr class="my-1"><strong class="mr-2">PM:</strong>'+subject.pm);
+            let semi_html='';
+            if(subject.partials.length>0){
 
+                semi_html+='<table class="w-100"><tr ><th class="w-45">Name</th><th class="w-25">Code</th><th class="w-15">FM</th><th class="w-15">PM</th></tr>';
+                subject.partials.forEach(partial => {
+                    semi_html+="<tr><td>"+partial.name+"</td><td>"+partial.code+"</td><td>"+partial.fm+"</td><td>"+partial.pm+"</td></tr>";
+                });
+                semi_html+="</table>";
+            }
+            html=html.replaceAll('xxx_dis',semi_html);
+
+            $('#subjects-holder').append(html);
+            
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
+
+    function loadData(e){
+        let fd=new FormData();
+        fd.append('level_id',$('#level_id').val());
+        if(document.getElementById('use-section').checked){
+            fd.append('section_id',$('#section_id').val());
+        }
+        axios.post('{{route('admin.exam.subject.index',['exam'=>$exam->id])}}',fd)
+        .then((res)=>{
+            $('#subjects-holder').html('');
+            console.log(res.data);
+            res.data.forEach(sub => {
+                renderData(sub);
+            });
+            // $('#marks-distribution').html('');
+            // $('#add-subject')[0].reset();
+            toastr.success('Subjects Loaded Sucessfully');
+            switchHolder(true);
+        })
+        .catch((err)=>{
+            console.log(err.response.data);
+            toastr.success('Subject Not Loaded, '+err.response.data.message);
+
+        });
+    }
+
+  
     function selectSection(ele){
         const section_data=anotherSelect(data.sections,$('#level_id').val(),1);
         document.getElementById('use-section').checked=section_data.length>0;
         $('#section_id').html(getOptions(section_data,2));
     }
-    function  checkEmail(e) {
-        // e.preventDefault();
-        if(!state){
-            $('#add-student').block();
-            axios.post('{{route('admin.email')}}',{'email':$('#email').val()})
-            .then((res)=>{
-                state=res.data.status<=0;
-                // $('#add-student').unblock();
-                if(state){
-                    // $('#add-student').submit();
-                    fd=new FormData(document.getElementById('add-student'));
-                    axios.post('{{route('admin.student.add')}}',fd)
-                    .then((res)=>{
-                        checkDataList();
-                        storeNoChange();
-                        document.getElementById('add-student').reset();
-                        updateNoChange();
-                        $('#documents').html('');
-                        $('#add-student').unblock();
-                        toastr.success("Student Added Successfully");
-                        state=false;
-                        if($('#no').length>0){
-                            $('#no').focus();
-                        }else{
-                            $('#name').focus();
-                        }
-
-                    })
-                    .catch((err)=>{
-                        $('#add-student').unblock();
-                        toastr.error("Cannot Add Student,"+err.response.data.message);
-                        state=false;
-
-                    });
-                }else{
-                    $('#add-student').unblock();
-                    alert('Email Already In Use Please Use Another Email.');
-                    state=false;
-                }
-            });
-        }
-    }
-
-    
-    function setGaurdian(type) {
-        ( ['name','aadhar_no','phone','email','occupation']).forEach(element => {
-            $('#gaurdian_'+element).val($('#'+type+"_"+element).val());
-        });
-    }
-
-    function storeNoChange(params) {
-        no_change_data=[];
-    
-        $('input.no_change').each( function (i  , ele) { 
-            if(ele.checked){
-                no_change_data[ele.dataset.id]=[$('#'+ele.dataset.id).val(),1];
-            }
-        });
-
-        $('span.no_change').each( function (i  , ele) { 
-            no_change_data[ele.dataset.id]=[$('#'+ele.dataset.id).val(),2];
-            
-        });
-        console.log(no_change_data);
-    }
-
-    function updateNoChange(params) {
-        for (const key in no_change_data) {
-            if (Object.hasOwnProperty.call(no_change_data, key)) {
-                const d = no_change_data[key];
-                if(d[1]==1){
-
-                    console.log("input[data-id='"+key+"']");
-                    $("input[data-id='"+key+"']")[0].checked=true;
-                }
-                $('#'+key).val(d[0]);
-
-            }
-        }
-    }
-    function checkDataList(){
-        $('input[list]').each( function (i  , ele) { 
-
-            const d=ele.value;
-            if(d!=""){
-                const list= $(ele).attr('list');
-                let obj = $('#'+list).find("option[value='" +d + "']");
-                    if(!(obj != null && obj.length > 0)){
-                        $('#'+list).append('<option value="'+d+'">'+d+'</option>');
-                    }
-            }
-        });
-    }
-
-    function removeDoc(id){
-        $('#doc-'+id).remove();
-    }
+   
 </script>
 @endsection

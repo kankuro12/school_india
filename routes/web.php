@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AcademicYearController;
+use App\Http\Controllers\Admin\AssessmentController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Admin\ExamController;
@@ -22,10 +23,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Route::get('/', function () {
-//     $data=['Teacher'];
-//     $newJsonString = json_encode($data, JSON_PRETTY_PRINT);
-
-//     file_put_contents(base_path('resources/lang/en.json'), stripslashes($newJsonString));
+//     foreach (\App\Data::assesments as $key => $assement) {
+//         # code...
+//     }
 // })->name('welcome');
 
 Route::prefix('admin')->name('admin.')->group(function(){
@@ -39,17 +39,28 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::match(['get', 'post'], '',[StudentController::class,'index'])->name('index');
     });
 
+    Route::prefix('assessment')->name('assessment.')->group(function(){
+        Route::match(['get', 'post'], 'add',[AssessmentController::class,'add'])->name('add');
+        Route::match(['get', 'post'], 'update',[AssessmentController::class,'update'])->name('update');
+        Route::match(['get', 'post'], '',[AssessmentController::class,'index'])->name('index');
+        Route::match(['get', 'post'], 'manage',[AssessmentController::class,'manage'])->name('manage');
+    });
+
+
+
+
     Route::prefix('exam')->name('exam.')->group(function(){
         Route::match(['get', 'post'], 'add',[ExamController::class,'add'])->name('add');
         Route::match(['get', 'post'], 'update/{exam}',[ExamController::class,'update'])->name('update');
         Route::post('delete',[ExamController::class,'delete'])->name('delete');
         Route::match(['get', 'post'], 'info/{id}',[ExamController::class,'info'])->name('info');
         Route::match(['get', 'post'], '',[ExamController::class,'index'])->name('index');
-        Route::prefix('subect')->name('subect.')->group(function(){
+        Route::prefix('subject')->name('subject.')->group(function(){
             Route::match(['get', 'post'], 'add/{exam}',[ExamSubjectController::class,'add'])->name('add');
             Route::match(['get', 'post'], 'update/{exam}',[ExamSubjectController::class,'update'])->name('update');
             Route::post('delete',[ExamSubjectController::class,'delete'])->name('delete');
-            Route::match(['get', 'post'], 'info/{id}',[ExamSubjectController::class,'info'])->name('info');
+            // Route::match(['get', 'post'], 'info/{info}',[ExamSubjectController::class,'info'])->name('info');
+            Route::match(['get', 'post'], 'mark/{subject}',[ExamSubjectController::class,'mark'])->name('mark');
             Route::match(['get', 'post'], 'setup/{exam}',[ExamSubjectController::class,'index'])->name('index');
         });
     });

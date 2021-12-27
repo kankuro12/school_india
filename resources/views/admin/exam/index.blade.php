@@ -53,6 +53,7 @@
                             <td>
                                 <a class="btn btn-table text-success" href="{{route('admin.exam.update',['exam'=>$exam->id])}}"><i class="material-icons">edit</i></a>
                                 <span class="btn btn-table  text-danger" onclick="del({{$exam->id}})"><i class="material-icons">delete</i></span>
+                                <a class="btn btn-table text-success" href="{{route('admin.exam.info',['id'=>$exam->id])}}"><i class="material-icons">visibility</i></a>
                             </td>
                         </tr>
                     @endforeach

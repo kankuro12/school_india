@@ -5,11 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ExamSubject extends Model
+class add_code_to_exam_subjects_table extends Model
 {
     use HasFactory;
-
-    public function partials(){
-        return $this->hasMany(ExamSubjectParts::class);
-    }
 }

@@ -44,7 +44,7 @@
     </div>
     <div class="card shadow mb-3">
         <div class="card-body">
-           <form action="{{route('admin.student.add')}}" id="add-student" method="post" enctype="multipart/form-data"
+           <form action="{{route('admin.student.add')}}" id="add-student" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <div class="col-md-12 card-title">

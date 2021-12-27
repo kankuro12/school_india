@@ -34,6 +34,10 @@
 @section('content')
     <div class="card shadow mb-4">
         <div class="card-body">
+            <a target="_blank" href="{{route('admin.exam.subject.index',['exam'=>$exam->id])}}" class="btn-primary btn mr-2" >
+                Manage Exam  Subjects
+            </a>
+            <hr>
             <table class="table " id="datatable">
                 <thead>
                     <tr>
@@ -76,13 +80,11 @@
                         </tr>
                 </tbody>
             </table>
-            <hr>
-            <a target="_blank" href="{{route('admin.exam.subect.index',['exam'=>$exam->id])}}" class="btn-primary btn mr-2" >
-                Manage Exam  Subjects
-            </a>
-            <a href="" class="btn-primary btn mr-2" >
+            {{-- <hr> --}}
+           
+            {{-- <a href="" class="btn-primary btn mr-2" >
                 Enter Marks Subjects
-            </a>
+            </a> --}}
         </div>
         
     </div>
