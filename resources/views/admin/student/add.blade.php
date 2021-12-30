@@ -33,9 +33,6 @@
         renderDataList("state",data.states);
         renderDataList("district",data.districts);
         renderDataList("tehsils",data.tehsils);
-        renderDataList("genetic_disorder",data.genetic_disorders);
-        renderDataList("mentally_chalanged",data.mentally_chalangeds);
-        renderDataList("handicap",data.handicaps);
         gender={!! json_encode(\App\Data::data['gender'])!!};;
     </script>
 

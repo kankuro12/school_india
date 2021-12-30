@@ -19,7 +19,7 @@ class AuthController extends Controller
                 'password'=>'required'
             ]);
             if(Auth::attempt(['email'=>$request->email,'password'=>$request->password,'role'=>1],$request->filled(('me')))){
-                return redirect()->route('welcome')->with('message',"Login Sucessfull");
+                return redirect()->route('admin.dashboard.index')->with('message',"Login Sucessfull");
             }else{
                 return redirect()->back()
                 ->with('error','Email and password Combination Wrong.')

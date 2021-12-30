@@ -19,6 +19,49 @@ function getData(_data) {
 
 }
 
+function getDataSpecific(_data,arr) {
+    let d=[];
+    arr.forEach(key => {   
+        if (Object.hasOwnProperty.call(_data, key)) {
+            const element = _data[key];
+            d[key]=[];
+            if(element!=null){
+    
+                arr=element.split(',');
+                arr.forEach(element_inner => {
+                    d[key].push(element_inner.split(':'));
+                });
+            }
+        }
+    });
+    
+    // console.log(d);
+    return d;
+
+}
+
+function mapData(l1,l2){
+    d=[];
+
+    l1.forEach(_l1 => {
+        let c=0;
+        l2.forEach(_l2 => {
+            if(_l1[0]==_l2[0]){
+                d.push([_l1[1],_l2[1]]);
+                c+=1;
+            }
+
+        });
+        if(c==0){
+            d.push([_l1[1],0]);
+        }
+    });
+
+    return d;
+        
+
+}
+
 function getOptions(_data,i){
     if(i==undefined || i==null){
         i=1;
@@ -79,4 +122,21 @@ function block(ele) {
 
 function unblock(ele) {
     $(ele).unblock();
+}
+
+function formatDate(_date){
+    year=_date.getFullYear();
+    month=_date.getMonth()+1;
+    day=_date.getDate();
+    return year+'-'+(month<10?('0'+month):month)+'-'+(day<10?('0'+day):day);
+}
+
+
+function startFocusSelect(){
+    $('input.focus-select').focus(function () { 
+        this.select();
+        this.selectAll();
+        
+    });
+    
 }

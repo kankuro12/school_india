@@ -163,15 +163,12 @@ class StudentController extends Controller
              (select GROUP_CONCAT(id,concat(":",title)) from levels) as levels,
              (select GROUP_CONCAT(id,concat(":",title)) from academic_years where status=1 and is_open_for_admission=1) as academic_years,
              (select GROUP_CONCAT(id,concat(":",level_id),concat(":",title)) from sections) as sections,
-             (select distinct(country) from students where country is not null ) as countries,
-             (select distinct(state) from students where state is not null ) as states,
-             (select distinct(district) from students where district is not null ) as districts,
-             (select distinct(tehsil) from students where tehsil is not null ) as tehsils,
-             (select distinct(town) from students where town is not null ) as towns,
-             (select distinct(pin) from students where pin is not null ) as pins,
-             (select distinct(genetic_disorder) from students where genetic_disorder is not null ) as genetic_disorders,
-             (select distinct(mentally_chalanged) from students where mentally_chalanged is not null ) as mentally_chalangeds,
-             (select distinct(handicap) from students where handicap is not null ) as handicaps
+             (select GROUP_CONCAT(c.data) from (select distinct(country) as data from students where country is not null )as c) as countries,
+             (select GROUP_CONCAT(s.data) from (select distinct(state) as data from students where state is not null )as s) as states,
+             (select GROUP_CONCAT(d.data) from (select distinct(district) as data from students where district is not null )as d) as districts,
+             (select GROUP_CONCAT(t.data) from (select distinct(tehsil) as data from students where tehsil is not null )as t) as tehsils,
+             (select GROUP_CONCAT(town.data) from (select distinct(town) as data from students where town is not null )as town) as towns,
+             (select GROUP_CONCAT(p.data) from (select distinct(pin) as data from students where pin is not null )as p) as pins
             ');
             // dd($data);
             return view('admin.student.add', compact('data'));

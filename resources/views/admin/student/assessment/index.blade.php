@@ -14,6 +14,8 @@
     _data={!! json_encode($data,true) !!};
     data=getData(_data);
 </script>
+
+@include('admin.student.assessment.edit')
 <div class="card shadow mb-3">
     <div class="card-body">
         <form action="{{route('admin.assessment.add')}}" method="post" id="add-assessment">
@@ -41,13 +43,14 @@
     </div>
 </div>
 
+
 <div class="card shadow">
     <div class="card-body">
         <table id="datatable" class="table">
             <thead>
                 <tr>
                     <th>
-                        #
+                        #CODE
                     </th>
                     <th>
                         Academic Year
@@ -71,7 +74,9 @@
                             {{$assessment->name}}
                         </td>
                         <td>
-                            <a href='{{route('admin.assessment.manage')}}?id={{$assessment->id}}'>Manage<a>
+                            <a class="btn btn-sm btn-primary mr-2" href='{{route('admin.assessment.manage')}}?id={{$assessment->id}}'>Manage<a>
+                            <button class="btn btn-sm btn-success mr-2" onclick="initEdit({{$assessment->id}},'{{$assessment->name}}',{{$assessment->academic_year_id}})">Edit</button>
+                            <button class="btn btn-sm btn-danger" onclick="del({{$assessment->id}})">Delete</button>
                         </td>
                     </tr>
                 @endforeach
@@ -87,7 +92,7 @@
         $(function () {
             table=$('#datatable').DataTable({
                 "columnDefs": [
-                    { "sortable":false,"searchable": false, "targets": 2 }
+                    { "sortable":false,"searchable": false, "targets": 3 }
                 ]
             });
 
@@ -95,7 +100,41 @@
                 e.preventDefault();
                 add(this);
             });
+
+            $('#edit-assessment').submit(function (e) { 
+                e.preventDefault();
+                edit(this);
+            });
         });
+
+        function edit(ele) {
+            let fd=new FormData(ele);
+            axios.post($(ele).attr('action'),fd)
+            .then((res)=>{
+                ele.reset();
+                $('#edit-assessment-modal').modal('hide');
+
+                const ay=(data.academic_years.filter(o=>o[0]==res.data.academic_year_id))[0][1];
+                console.log(ay);
+                table.row('#assessment-'+res.data.id).data(
+                [
+                    res.data.id,
+                    ay,
+                    res.data.name,
+                    "<a class='btn btn-sm btn-primary mr-2' href='{{route('admin.assessment.manage')}}?id="+res.data.id+"'>Manage<a>"+
+                    '<button class="btn btn-sm btn-success mr-2" onclick="initEdit('+res.data.id+',\''+res.data.name+'\','+res.data.academic_year_id+')">Edit</button>'+
+                    '<button class="btn btn-sm btn-danger" onclick="del('+res.data.id+')">Delete</button>'
+                ]
+                );
+                table.draw(false);
+            })
+            .catch((err)=>{
+                console.log(err);
+            });
+            // table.row.add( [
+            //     'adfasdf','ll','<a href="asdfas">kk</a>'
+            // ]).draw();
+        }
 
         function add(ele) {
             let fd=new FormData(ele);
@@ -109,16 +148,45 @@
                     res.data.id,
                     ay,
                     res.data.name,
-                    "<a href='{{route('admin.assessment.manage')}}?id="+res.data.id+"'>Manage<a>"
+                    "<a class='btn btn-sm btn-primary mr-2' href='{{route('admin.assessment.manage')}}?id="+res.data.id+"'>Manage<a>"+
+                    '<button class="btn btn-sm btn-success mr-2" onclick="initEdit('+res.data.id+',\''+res.data.name+'\','+res.data.academic_year_id+')">Edit</button>'+
+                    '<button class="btn btn-sm btn-danger" onclick="del('+res.data.id+')">Delete</button>'
                 ]
-                ).draw();
+                ).node().id = 'assessment-'+res.data.id;
+                table.draw(false);
+                toastr.success('Assessment Updated Sucessfully');
             })
             .catch((err)=>{
                 console.log(err);
+                toastr.error('Assessment Not Updated.');
+
             });
             // table.row.add( [
             //     'adfasdf','ll','<a href="asdfas">kk</a>'
             // ]).draw();
+        }
+
+        function initEdit(id,name,ay_id) {
+            console.log(id,name,ay_id);
+                $('#edit-assessment-modal').modal('show');
+                $('#eid').val(id);
+                $('#ename').val(name);
+                $('#eacademic_year_id').val(ay_id);
+        }   
+
+        function del(id) {
+            if(confirm('Do You want To Delete Assesment?')){
+                axios.post('{{route('admin.assessment.del')}}',{id:id})
+                .then((res)=>{
+                    table.row('#assessment-'+id).remove().draw();
+                    toastr.success('Assessment Deleted Sucessfully');
+                })
+                .catch((err)=>{
+                    console.log(err);
+                    toastr.error('Assessment Not deleted.');
+
+                });
+            }
         }
     </script>
 @endsection

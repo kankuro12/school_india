@@ -1,6 +1,8 @@
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+{{-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script> --}}
+<link rel="stylesheet" href="{{asset('admin/css/toastr.css')}}">
+<script src="{{asset('admin/js/toastr.js')}}"></script>
 @if (Session::has('message') || Session::has('error') || Session::has('warning') || Session::has('info'))
     <script>
         @if (Session::has('message'))

@@ -7,7 +7,9 @@ use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Admin\ExamController;
 use App\Http\Controllers\Admin\ExamSubjectController;
 use App\Http\Controllers\Admin\LevelController;
+use App\Http\Controllers\Admin\StudentAttendanceController;
 use App\Http\Controllers\Admin\StudentController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SettingController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +31,9 @@ use Illuminate\Support\Facades\Route;
 // })->name('welcome');
 
 Route::prefix('admin')->name('admin.')->group(function(){
+    Route::prefix('dashboard')->name('dashboard.')->group(function(){
+        Route::match(['GET','POST'],'',[DashboardController::class,'index'])->name('index');
+    });
     Route::middleware('guest')->group(function(){
         route::match(['GET','POST'],'login',[AuthController::class,'login'])->name('login');
     });
@@ -37,10 +42,19 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::match(['get', 'post'], 'add',[StudentController::class,'add'])->name('add');
         Route::match(['get', 'post'], 'update',[StudentController::class,'update'])->name('update');
         Route::match(['get', 'post'], '',[StudentController::class,'index'])->name('index');
+        Route::prefix('attendance')->name('attendance.')->group(function(){
+            Route::match(['get', 'post'], 'add',[StudentAttendanceController::class,'add'])->name('add');
+            Route::match(['get', 'post'], 'update',[StudentAttendanceController::class,'update'])->name('update');
+            Route::match(['get', 'post'], '',[StudentAttendanceController::class,'index'])->name('index');
+        });
     });
+
+
 
     Route::prefix('assessment')->name('assessment.')->group(function(){
         Route::match(['get', 'post'], 'add',[AssessmentController::class,'add'])->name('add');
+        Route::match(['get', 'post'], 'addPoint',[AssessmentController::class,'addPoint'])->name('addPoint');
+        Route::match(['get', 'post'], 'del',[AssessmentController::class,'del'])->name('del');
         Route::match(['get', 'post'], 'update',[AssessmentController::class,'update'])->name('update');
         Route::match(['get', 'post'], '',[AssessmentController::class,'index'])->name('index');
         Route::match(['get', 'post'], 'manage',[AssessmentController::class,'manage'])->name('manage');

@@ -28,7 +28,7 @@ class AddExamSubjectPartIdToExamMarkPartsTable extends Migration
     {
         Schema::table('exam_mark_parts', function (Blueprint $table) {
             //
-            $table->dropColumn('exam_subject_part_id');
+            $table->dropForeign(['exam_subject_part_id']);
 
         });
     }
