@@ -1,10 +1,10 @@
 <div class="card shadow mt-4">
     <div class="card-header">
-      Student Assessment Percentile
+      Student Grade Percentile Summary
     </div>
     <div class="card-body">
-      <div class="p-5" style="overflow-x: auto;">
-          <canvas id="assessment_percentile"></canvas>
+      <div  style="overflow-x: auto;" >
+          <canvas id="assessment_percentile" ></canvas>
       </div>
     </div>
 </div>
@@ -28,7 +28,7 @@ labels['assessment_percentile']= [
 datasets['assessment_percentile'] = {
     labels: labels['assessment_percentile'],
     datasets: [{
-        label: ' Student Assesment Percentile',
+        label: ' Student Grade Percentile',
         backgroundColor:colors[10],
         data: datas['assessment_percentile'],
     }]

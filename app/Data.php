@@ -37,6 +37,19 @@ class Data
 
     ];
 
+    const pageTypes=[
+        'dept'=>['Department','Departments',[],false,null,true,'Description'],
+        'about'=>['About Us','About Us',[],false,null,true,'Description'],
+        'fac'=>['Facility','Facilities',[],false,null,true,'Description'],
+        'not'=>['Notice','Notices',[],true,'file|single|Downloads',false,'Content'],
+        'prog'=>['Program','Programs',[
+            'prog_01'=>'Fee Structre',
+            'prog_02'=>'Lab',
+            'prog_03'=>'Scholorship Scheme',
+            'prog_04'=>'Achivements'
+        ],true,'gallery|multiple|Gallery',true,'Description']
+    ];
+
     const assesments=[
         [
             'name'=>'Personal and Social Performance Assessment','code'=>'01','options' =>[

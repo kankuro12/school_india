@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Admin\ExamController;
 use App\Http\Controllers\Admin\ExamSubjectController;
 use App\Http\Controllers\Admin\LevelController;
+use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\StudentAttendanceController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\DashboardController;
@@ -49,6 +50,12 @@ Route::prefix('admin')->name('admin.')->group(function(){
         });
     });
 
+    Route::prefix('page')->name('page.')->group(function(){
+        Route::get('@{type}',[PageController::class,'index'])->name('index');
+        Route::match(['get', 'post'],'add/@{type}',[PageController::class,'add'])->name('add');
+        Route::match(['get', 'post'],'edit/{page}',[PageController::class,'edit'])->name('edit');
+        Route::match(['get', 'post'],'del/{page}',[PageController::class,'del'])->name('del');
+    });
 
 
     Route::prefix('assessment')->name('assessment.')->group(function(){
@@ -59,6 +66,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::match(['get', 'post'], '',[AssessmentController::class,'index'])->name('index');
         Route::match(['get', 'post'], 'manage',[AssessmentController::class,'manage'])->name('manage');
     });
+
 
 
 

@@ -7,7 +7,11 @@ use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
-    public function index(Request $request){
+    public function index(){
+        return view('admin.dashboard.index');
+
+    }
+    public function index_old(Request $request){
         if($request->getMethod()=="POST"){
             $query="select count(id),religion_id from students group by religion_id";
         }else{
