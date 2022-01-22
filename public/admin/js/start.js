@@ -140,3 +140,36 @@ function startFocusSelect(){
     });
     
 }
+
+function template(str,obj){
+    var t='';
+    console.log(obj);
+    i=0;
+    for (const key in obj) {
+        if (obj.hasOwnProperty.call(obj, key)) {
+            const element = obj[key];
+            if(i++==0){
+
+                t=str.replaceAll('xxx_'+key,element);
+            }else{
+                t=t.replaceAll('xxx_'+key,element);
+
+            }
+        }
+    }
+    return t;
+}
+
+function strReplaceAll(str,searchArr,replaceArr) {
+    var t='';
+    for (let index = 0; index < searchArr.length; index++) {
+        const search = searchArr[index];
+        const replace = replaceArr[index];
+        if(index==0){
+            t=str.replaceAll(search,replace);
+        }else{
+            t=t.replaceAll(search,replace);
+        }
+    }
+    return t;
+}

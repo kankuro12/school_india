@@ -31,6 +31,18 @@
             </li>
             @endforeach
 
+            <li >
+                <a href="#">
+                    <i class="material-icons">settings</i>
+                    Front Setting
+                    <i class="material-icons has-sub-menu">add</i>
+                </a>
+                <ul class="sub-menu">
+                    <li class="sub-item">
+                        <a  href="{{route('admin.menu.index')}}" >Menus</a>
+                    </li>
+                </ul>
+            </li>
         </ul>
         <br>
         <br>

@@ -112,7 +112,6 @@
      window.onload = function() {
             $('#accordion-menu a').each(function (index, element) {
                 if(element.href== window.location.href){
-                    console.log(element.href,window.location.href);
                     const n1=element.parentNode;
                     if($(n1).hasClass('sub-item')){
                         const n2=n1.parentNode;
