@@ -9,11 +9,13 @@ use App\Http\Controllers\Admin\ExamSubjectController;
 use App\Http\Controllers\Admin\LevelController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\PageController;
+use App\Http\Controllers\Admin\SettingController as AdminSettingController;
 use App\Http\Controllers\Admin\StudentAttendanceController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\SliderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,6 +36,7 @@ use Illuminate\Support\Facades\Route;
 // })->name('welcome');
 
 Route::get('',[HomeController::class,'index'])->name('home');
+Route::get('image',[HomeController::class,'image'])->name('image');
 Route::get('page/@{type}',[HomeController::class,'pageType'])->name('page.type');
 Route::get('page/{id}',[HomeController::class,'page'])->name('page');
 
@@ -64,6 +67,17 @@ Route::prefix('admin')->name('admin.')->group(function(){
             Route::match(['get', 'post'],'edit/{page}',[PageController::class,'edit'])->name('edit');
             Route::match(['get', 'post'],'del/{page}',[PageController::class,'del'])->name('del');
         });
+        Route::prefix('setting')->name('setting.')->group(function(){
+            Route::match(['GET','POST'],'@{type}',[AdminSettingController::class,'index'])->name('index');
+            
+        });
+        Route::prefix('slider')->name('slider.')->group(function(){
+            Route::get('',[SliderController::class,'index'])->name('index');
+            Route::match(['get', 'post'],'add/',[SliderController::class,'add'])->name('add');
+            Route::match(['get', 'post'],'edit',[SliderController::class,'edit'])->name('edit');
+            Route::match(['get', 'post'],'del',[SliderController::class,'del'])->name('del');
+        });
+
         Route::prefix('menu')->name('menu.')->group(function(){
             Route::get('',[MenuController::class,'index'])->name('index');
             Route::match(['get', 'post'],'add/',[MenuController::class,'add'])->name('add');

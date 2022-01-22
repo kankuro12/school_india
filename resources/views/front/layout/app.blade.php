@@ -19,35 +19,7 @@
 
 <body>
   <header>
-    <div class="header-top">
-      <div class="row">
-        <div class="col-md-6 tagline">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut similique rerum aliquid corporis nam eaque? Enim
-          repudiandae ratione fugiat, vel distinctio eveniet unde aliquam explicabo magnam dolorem sit veniam
-          voluptatem?
-        </div>
-        <div class="col-md-6">
-          <div class="links-top">
-            <span>
-              <a href="asdf"> <i class="fas fa-envelope"></i> cms111000111@gmail.com</a>
-            </span>
-            <span>
-              <a href="asdf"> <i class="fas fa-phone"></i> 9800916365</a>
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="header-middle">
-      <div class="row">
-        <div class="col-md-6 logo">
-          <img src="/uploads/setting/logo.jpg" alt="">
-          <h6>
-            Purbanchal University School of Engineering and Technology
-          </h6>
-        </div>
-      </div>
-    </div>
+    @include('front.layout.top')
     @include('front.layout.bottom')
     <div class="header-mobile">
       <img src="/uploads/setting/logo.jpg" alt="">

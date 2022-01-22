@@ -40,6 +40,7 @@ class Data
     const pageTypes=[
         'dept'=>['Department','Departments',[],false,null,true,'Description'],
         'about'=>['About Us','About Us',[],false,null,true,'Description'],
+        'news'=>['News','News',[],false,'gallery|multiple|Gallery',true,'Content'],
         'fac'=>['Facility','Facilities',[],false,null,true,'Description'],
         'not'=>['Notice','Notices',[],true,'file|single|Downloads',false,'Content'],
         'prog'=>['Program','Programs',[
