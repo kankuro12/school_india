@@ -39,7 +39,16 @@
                 </a>
                 <ul class="sub-menu">
                     <li class="sub-item">
+                        <a  href="{{route('admin.setting.index',['type'=>'top'])}}" >Header</a>
+                    </li>
+                    <li class="sub-item">
                         <a  href="{{route('admin.menu.index')}}" >Menus</a>
+                    </li>
+                    <li class="sub-item">
+                        <a  href="{{route('admin.setting.slider.index')}}" >sliders</a>
+                    </li>
+                    <li class="sub-item">
+                        <a  href="{{route('admin.setting.footer.index')}}" >Footer</a>
                     </li>
                 </ul>
             </li>

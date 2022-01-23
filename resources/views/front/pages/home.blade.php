@@ -2,18 +2,7 @@
 @section('content')
     <div id="home-page">
         <div>
-            <div class="owl-carousel owl-theme owl-home">
-                <div class="item">
-                    <div class="inner">
-                        <h5>title text</h5>
-                        <h6>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores sequi debitis eveniet,
-                            molestiae
-                            reprehenderit?</h6>
-                        <a href="">Some Link</a>
-                    </div>
-                </div>
-
-            </div>
+            @include('front.pages.home.slider')
         </div>
         <div class="page-inner">
             <div class="row shadow m-0">

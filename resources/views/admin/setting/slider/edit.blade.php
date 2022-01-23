@@ -14,96 +14,119 @@
             margin-top: 5px;
         }
 
-        .form-control,.tox{
+        .form-control,
+        .tox {
             border-radius: 5px !important;
         }
+
     </style>
 @endsection
 @section('page-option')
 @endsection
 @section('s-title')
     <li class="breadcrumb-item">
-        <a href="{{ route('admin.page.index', ['type' => $type]) }}">{{ $pageType[1] }}</a>
+        <a href="{{ route('admin.setting.slider.index') }}">Sliders</a>
+    </li>
+    <li class="breadcrumb-item">
+        {{$slider->title}}
     </li>
     <li class="breadcrumb-item active">
-        Add
+        Edit
     </li>
 @endsection
 @section('content')
 
     <div class="card shadow mb-3">
         <div class="card-body">
-            <form action="{{ route('admin.page.add',['type'=>$type]) }}" method="post" enctype="multipart/form-data" id="add-employee">
+            <form action="{{ route('admin.setting.slider.edit',['slider'=>$slider->id]) }}" method="post" enctype="multipart/form-data" id="add-slider">
 
                 @csrf
                 <div class="row">
-                    @if ($pageType[5])
-                        
-                        <div class="col-md-4">
-                            <label for="photo">Feature Image</label>
-                            <input type="file" required name="photo" id="photo" accept="image/*">
-                        </div>
-                    @endif
-
-                    <div class="col-md-{{$pageType[5]?8:12}} py-2">
-                        <div>
-                            <label for="title">Title</label>
-                            <input type="text" name="title" id="title" class="form-control" required>
-                        </div>
-                        <div>
-                            <label for="short_desc">Short {{$pageType[6]}}</label>
-                            <textarea name="short_desc" id="short_desc" cols="30" rows="10"
-                                class="form-control" required></textarea>
-                        </div>
-                        @if (count($pageType[2]) > 0)
-                            @foreach ($pageType[2] as $key => $descType)
-                                <div>
-                                    <label for="{{ $key }}">{{ $descType }}</label>
-                                    <textarea name="{{ $key }}" id="{{ $key }}" cols="30" rows="10"
-                                        class="form-control desc"></textarea>
-                                </div>
-                            @endforeach
-                        @else
-                            <div>
-                                <label for="desc">Extra {{$pageType[6]}}</label>
-                                <textarea name="desc" id="desc" cols="30" rows="10" class="desc form-control"></textarea>
-                            </div>
-                        @endif
-
-                        @if ($pageType[4]!=null)
-                            @php
-                                $data=explode('|',$pageType[4]);
-                               
-                            @endphp
-                            <div class="card-title">
-                                <hr>
-                                <div class="d-flex justify-content-between">
-                                    <span>
-                                        {{$data[2]}}
-                                    </span>
-                                    <span>
-                                        <span class="btn btn-secondary btn-sm" onclick="addDocument()">Add File/Image</span>
-                                    </span>
-                                
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="row" id="documents">
-                
-                                </div>
-                            </div>
-                        @endif
-                      
-                        <div class="py-2">
-
-                            <button class="btn btn-primary">Save {{$pageType[0]}}</button>
-
-                            <a href="{{ route('admin.page.index', ['type' => $type]) }}" class=" ms-2 btn btn-danger">Cancel</a>
-                        </div>
-
-                        
-
+                    <div class="col-md-9">
+                        <label for="image">Image</label>
+                        <input type="file" name="image" id="image" class="form-control photo"  data-default-file="{{asset($slider->image)}}">
                     </div>
+                    <div class="col-md-3">
+                        <label for="mobile_image">Mobile Image</label>
+                        <input type="file" name="mobile_image" id="mobile_image" class="form-control photo"  data-default-file="{{asset($slider->image)}}">
+                    </div>
+                    <div class="col-md-12">
+                        <label for="title">Title</label>
+                        <input type="text" name="title" id="title" class="form-control " required value="{{$slider->title}}">
+                    </div>
+                    <div class="col-md-12">
+                        <label for="subtitle">Subtitle</label>
+                        <input type="text" name="subtitle" id="subtitle" class="form-control " required value="{{$slider->subtitle}}">
+                    </div>
+
+                </div>
+                <h5 class="p-3 shadow mt-3">
+                    Current Link : {{$slider->link}}  <br> Link Text : {{$slider->link_title}}
+                </h5>
+                <div class="py-2">
+                    <input type="checkbox" value="1" name="change_link"  id="change-link" onchange="$('#btn-setting').css('display',this.checked?'block':'none');"> <label for="change-link">Change Link</label>
+                </div>
+
+                <div class="shadow mt-3" id="btn-setting" style="display: none">
+                    <h5 class="p-3">Button Setting</h5>
+                    <hr class="m-0">
+                        <div class="p-3">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="link_title">Title</label>
+                                        <input type="text" name="link_title" id="link_title" value="{{$slider->link_title}}" class="form-control" >
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="type">Link Type</label>
+                                        <select name="type" id="type" class="form-control" >
+                                            @php
+                                                $i = 2;
+                                            @endphp
+                                            @foreach (\App\Data::pageTypes as $key => $pageType)
+                                                <option value="{{ $key }}">{{ $pageType[1] }}</option>
+                                            @endforeach
+                                            <option value="2">Other Link</option>
+                                            <option value="3">Custom Link</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3" id="link-wrapper">
+
+                                    <div class="form-group">
+                                        <label for="links">links</label>
+                                        <select name="links" id="links" class="form-control">
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3" id="extra-link-wrapper">
+                                    <div class="form-group">
+                                        <label for="extra-links">Custom links</label>
+                                        <input type="text" name="extra_links" id="extra-links" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="bg">Background</label>
+                                        <input type="color" name="bg" id="bg" value="{{$slider->bg}}" class="w-100">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="fg">Font Color</label>
+                                        <input type="color" name="fg" id="fg" value="{{$slider->fg}}" class="w-100">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                <div class="py-2">
+                    <button class="btn btn-primary">
+                        Update Slider
+                    </button>
                 </div>
             </form>
         </div>
@@ -111,42 +134,62 @@
 
 @endsection
 @section('script')
-<script src="https://cdn.tiny.cloud/1/4adq2v7ufdcmebl96o9o9ga7ytomlez18tqixm9cbo46i9dn/tinymce/5/tinymce.min.js"
-        referrerpolicy="origin"></script>
-        <script src="{{ asset('admin/plugins/drophify/js/dropify.min.js') }}"></script>
-    <script>
-        var state = false;
-        @if ($pageType[4]!=null)
-        
-        var did=0;
 
-        function  addDocument(params) {
-            html='<div id="doc-'+did+'" class="col-md-{{$pageType[5]?'6':'3'}}  mb-3"><div class="shadow p-2"><input type="hidden" name="docs[]" value="'+did+'"/>'+
-                '<div><input type="file" accept="image/*,.pdf,.docx" id="doc_image_'+did+'" name="doc_image_'+did+'" reuired/></div>'+
-                '<div class="mt-2"><label class="w-100 d-block d-flex justify-content-between align-items-center">'+
-                '<span>File Name</span>'+
-                '<span class="btn btn-danger btn-sm" onclick="removeDoc('+did+')"> Remove</span>'+
-                '</label><input class="form-control" type="text" id="doc_name_'+did+'" name="doc_name_'+did+'" required /></div>'+
-                '</div></div>';
-            $('#documents').append(html);
-            $("#doc_image_"+did).dropify();
-            did+=1;
-        }   
-        function removeDoc(id){
-            $('#doc-'+id).remove();
-        }
-        @endif
+    <script src="{{ asset('admin/plugins/drophify/js/dropify.min.js') }}"></script>
+    <script>
+        const pages = {!! json_encode($pages) !!};
+        const options = [
+            @foreach (\App\Data::pageTypes as $key => $pageType)
+                ["{{ route('page.type', ['type' => $key]) }}","{{ $pageType[1] }}"],
+            @endforeach['{{ route('home') }}', "Home"],
+        ];
+        const url = "{{ route('page', ['id' => 'xxx_id']) }}";
+
         $(function() {
-            $('#photo').dropify();
-            tinymce.init({
-                selector: '.desc',
-                plugins: [
-                    '  advlist anchor autolink codesample fullscreen help image imagetools tinydrive',
-                    ' lists link media noneditable  preview',
-                    ' searchreplace table template  visualblocks wordcount'
-                ],
-                toolbar_mode: 'floating',
+            $('.photo').dropify();
+            typeChanged($('#type')[0]);
+            $('#type').change(function (e) { 
+                e.preventDefault();
+                typeChanged(this);
             });
         });
+
+        function typeChanged(ele) {
+            $('#link-wrapper').addClass('d-none');
+            $('#extra-link-wrapper').addClass('d-none');
+            $('#links').removeAttr('required');
+            $('#extra-links').removeAttr('required');
+            // e.preventDefault();
+            switch ($(ele).val()) {
+               
+                case "2":
+                    $('#links').attr('required', 'required');
+                    $('#link-wrapper').removeClass('d-none');
+                    html = '';
+                    options.forEach(page => {
+                        html += "<option value='" + page[0] + "'>" +
+                            page[1] + "</option>"
+                    });
+                    $('#links').html(html);
+                    break;
+                case "3":
+                    $('#extra-link-wrapper').removeClass('d-none');
+                    $('#extra-links').attr('required', 'required');
+
+                    break;
+
+                default:
+                    $('#links').attr('required', 'required');
+                    $('#link-wrapper').removeClass('d-none');
+                    let _options = pages.filter(o => o.type == $(ele).val());
+                    html = '';
+                    _options.forEach(page => {
+                        html += "<option value='" + (url.replace('xxx_id', page.id)) + "'>" +
+                            page.title + "</option>"
+                    });
+                    $('#links').html(html);
+                    break;
+            }
+        }
     </script>
 @endsection

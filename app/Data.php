@@ -42,7 +42,8 @@ class Data
         'about'=>['About Us','About Us',[],false,null,true,'Description'],
         'news'=>['News','News',[],false,'gallery|multiple|Gallery',true,'Content'],
         'fac'=>['Facility','Facilities',[],false,null,true,'Description'],
-        'not'=>['Notice','Notices',[],true,'file|single|Downloads',false,'Content'],
+        'fau'=>['Faculty','Faculties',[],false,null,true,'Description'],
+        'not'=>['Notice','Notics',[],true,'file|single|Downloads',false,'Content'],
         'prog'=>['Program','Programs',[
             'prog_01'=>'Fee Structre',
             'prog_02'=>'Lab',

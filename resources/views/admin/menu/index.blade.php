@@ -263,8 +263,8 @@
                     $('#link-wrapper').removeClass('d-none');
                     html = '';
                     options.forEach(page => {
-                        html += "<option value='" + (url.replace('xxx_id', page.id)) + "'>" +
-                            page.title + "</option>"
+                        html += "<option value='" + page[0] + "'>" +
+                            page[1] + "</option>"
                     });
                     $('#links').html(html);
                     break;
@@ -295,13 +295,16 @@
             $('#eextra-links').removeAttr('required');
             // e.preventDefault();
             switch ($(ele).val()) {
-                case "1":
-
-                    break;
+              
                 case "2":
                     $('#elinks').attr('required', 'required');
                     $('#elink-wrapper').removeClass('d-none');
-
+                    html = '';
+                    options.forEach(page => {
+                        html += "<option value='" + page[0] + "'>" +
+                            page[1] + "</option>"
+                    });
+                    $('#elinks').html(html);
                     break;
                 case "3":
                     $('#eextra-link-wrapper').removeClass('d-none');
@@ -312,9 +315,9 @@
                 default:
                     $('#elinks').attr('required', 'required');
                     $('#elink-wrapper').removeClass('d-none');
-                    let options = pages.filter(o => o.type == $(ele).val());
+                    let _options = pages.filter(o => o.type == $(ele).val());
                     html = '';
-                    options.forEach(page => {
+                    _options.forEach(page => {
                         html += "<option value='" + (url.replace('xxx_id', page.id)) + "'>" +
                             page.title + "</option>"
                     });

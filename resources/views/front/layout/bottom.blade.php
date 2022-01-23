@@ -5,7 +5,7 @@
               asdfsasdfasdfasfasdf
             </button>
             <ul class="dropdown-menu" aria-labelledby="menu-12">
-                                    <li><a class="dropdown-item" href="http://localhost:8000/page/1">asdfasdfsd</a></li>
+                                    <li><a class="dropdown-item" href="http://localhost:8000/page/@not">asdfasdfsd</a></li>
                                     <li><a class="dropdown-item" href="http://localhost:8000/page/1">sdfsd</a></li>
                             
             </ul>

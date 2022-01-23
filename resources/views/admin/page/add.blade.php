@@ -56,7 +56,7 @@
                         <div>
                             <label for="short_desc">Short {{ $pageType[6] }}</label>
                             <textarea name="short_desc" id="short_desc" cols="30" rows="10" class="form-control"
-                                required></textarea>
+                                ></textarea>
                         </div>
                         @if (count($pageType[2]) > 0)
                             @foreach ($pageType[2] as $key => $descType)

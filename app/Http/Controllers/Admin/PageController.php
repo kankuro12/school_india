@@ -27,7 +27,7 @@ class PageController extends Controller
         if($request->getMethod()=="POST"){
             $page=new Page();
             $page->title=$request->title;
-            $page->short_desc=$request->short_desc;
+            $page->short_desc=$request->short_desc??'';
 
             if(count($pageType[2])>0){
                 $data=[];
@@ -36,12 +36,14 @@ class PageController extends Controller
                 }
                 $page->desc=json_encode($data);
             }else{
-                $page->desc=$request->desc;
+                $page->desc=$request->desc??'';
             }
             $page->type=$type;
 
             if($request->hasFile('photo')){
                 $page->image=$request->photo->store('uploads/page/'.Carbon::now()->format('Y/m/d'));
+            }else{
+                $page->image='';
             }
             $page->save();
            
@@ -63,5 +65,60 @@ class PageController extends Controller
         }else{
             return view('admin.page.add',compact('type','pageType'));
         }
+    }
+
+    public function edit(Page $page,Request $request)
+    {
+        $pageType=Data::pageTypes[$page->type];
+        if($request->getMethod()=="POST"){
+            $page->title=$request->title;
+            $page->short_desc=$request->short_desc;
+
+            if(count($pageType[2])>0){
+                $data=[];
+                foreach ($pageType[2] as $key => $descType) {
+                    $data[$key]=$request->input($key)??"";
+                }
+                $page->desc=json_encode($data);
+            }else{
+                $page->desc=$request->desc??'';
+            }
+
+            if($request->hasFile('photo')){
+                $page->image=$request->photo->store('uploads/page/'.Carbon::now()->format('Y/m/d'));
+            }
+            $page->save();
+           
+            $files=[];
+            if ($request->filled('docs')) {
+                foreach ($request->docs as $key => $doc) {
+                    if($request->hasFile('doc_image_' . $doc)){
+                        $d = new PageUpload();
+                        $d->title = $request->input('doc_name_' . $doc);
+                        $d->file = $request->file('doc_image_' . $doc)->store('uploads/page/' . getIDPath($page->id));
+                        $d->page_id = $page->id;
+                        $d->save();
+                        array_push($files,$d);
+                    }
+                }
+            }
+            return redirect()->back()->with('message',"{$pageType[0]} Updated Sucessfully");
+        }else{
+        return view('admin.page.edit',compact('page','pageType'));
+
+        }
+    }
+
+    public function del(Page $page){
+
+        $pageType=Data::pageTypes[$page->type];
+        $page->delete();
+        return redirect()->back()->with('message',"{$pageType[0]} Deleted Sucessfully");
+
+    }
+    public function delDoc(Request $request)            
+    {
+        $file=PageUpload::find($request->id);
+        $file->delete();
     }
 }

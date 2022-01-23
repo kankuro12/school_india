@@ -20,6 +20,7 @@ class CreateSlidersTable extends Migration
             $table->string('subtitle',160)->nullable();
             $table->string('title',160);
             $table->text('link')->nullable();
+            $table->text('link_title')->nullable();
             $table->string('bg',10)->nullable();
             $table->string('fg',10)->nullable();
             $table->timestamps();

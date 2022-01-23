@@ -41,7 +41,7 @@
                             <a href="{{route('admin.page.edit',['page'=>$page->id])}}" class="btn btn-sm btn-secondary">
                                 Edit
                             </a>
-                            <a href="{{route('admin.page.del',['page'=>$page->id])}}" class="btn btn-sm btn-danger">
+                            <a href="{{route('admin.page.del',['page'=>$page->id])}}" onclick="return prompt('Enter yes To Delete {{$pageType[0]}}')=='yes';" class="btn btn-sm btn-danger">
                                 del
                             </a>
                         </td>

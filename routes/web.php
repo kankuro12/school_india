@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Admin\ExamController;
 use App\Http\Controllers\Admin\ExamSubjectController;
+use App\Http\Controllers\Admin\FooterController;
 use App\Http\Controllers\Admin\LevelController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\PageController;
@@ -66,16 +67,22 @@ Route::prefix('admin')->name('admin.')->group(function(){
             Route::match(['get', 'post'],'add/@{type}',[PageController::class,'add'])->name('add');
             Route::match(['get', 'post'],'edit/{page}',[PageController::class,'edit'])->name('edit');
             Route::match(['get', 'post'],'del/{page}',[PageController::class,'del'])->name('del');
+            Route::match(['get', 'post'],'delDoc',[PageController::class,'delDoc'])->name('delDoc');
         });
         Route::prefix('setting')->name('setting.')->group(function(){
             Route::match(['GET','POST'],'@{type}',[AdminSettingController::class,'index'])->name('index');
             
-        });
-        Route::prefix('slider')->name('slider.')->group(function(){
-            Route::get('',[SliderController::class,'index'])->name('index');
-            Route::match(['get', 'post'],'add/',[SliderController::class,'add'])->name('add');
-            Route::match(['get', 'post'],'edit',[SliderController::class,'edit'])->name('edit');
-            Route::match(['get', 'post'],'del',[SliderController::class,'del'])->name('del');
+            Route::prefix('slider')->name('slider.')->group(function(){
+                Route::get('',[SliderController::class,'index'])->name('index');
+                Route::match(['get', 'post'],'add',[SliderController::class,'add'])->name('add');
+                Route::match(['get', 'post'],'edit/{slider}',[SliderController::class,'edit'])->name('edit');
+                Route::match(['get', 'post'],'del/{slider}',[SliderController::class,'del'])->name('del');
+            });
+
+            Route::prefix('footer')->name('footer.')->group(function(){
+                Route::match(['GET','POST'],'',[FooterController::class,'index'])->name('index');
+              
+            });
         });
 
         Route::prefix('menu')->name('menu.')->group(function(){
