@@ -71,6 +71,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
         });
         Route::prefix('setting')->name('setting.')->group(function(){
             Route::match(['GET','POST'],'@{type}',[AdminSettingController::class,'index'])->name('index');
+            Route::match(['GET','POST'],'/homepage',[AdminSettingController::class,'homepage'])->name('homepage');
             
             Route::prefix('slider')->name('slider.')->group(function(){
                 Route::get('',[SliderController::class,'index'])->name('index');

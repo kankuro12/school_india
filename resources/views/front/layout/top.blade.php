@@ -1,18 +1,18 @@
 <div class="header-top">
     <div class="row">
       <div class="col-md-6 tagline">
-        We Are the best
+        Engineering Department
       </div>
       <div class="col-md-6">
         <div class="links-top">
           <span>
-            <a href="mailto:cms111000111@gmail.com"> <i class="fas fa-envelope"></i>         
-                cms111000111@gmail.com
+            <a href="mailto:purbanchaluniversityeng@com"> <i class="fas fa-envelope"></i>         
+                purbanchaluniversityeng@com
             </a>
           </span>
           <span>
-            <a href="tel:9800916365"> <i class="fas fa-phone"></i> 
-                9800916365
+            <a href="tel:980000000"> <i class="fas fa-phone"></i> 
+                980000000
             </a>
           </span>
         </div>
@@ -22,9 +22,9 @@
   <div class="header-middle">
     <div class="row">
       <div class="col-md-6 logo">
-        <img src="http://localhost:8000/uploads/settings/vIpNzokF3DN7X50Iz4pQpOnRJbkLFbPlmYu9l84i.png" alt="">
+        <img src="http://192.168.254.151:8000/uploads/settings/5EpeJ2r9m8YsTIUJqFOri3K68d6pAO9Xr2t9eIsY.png" alt="">
         <h6>
-            Purbanchal University  School of Engineering  PUSOE
+            Purbanchal University School of Engineering(PUSOE)
         </h6>
       </div>
     </div>

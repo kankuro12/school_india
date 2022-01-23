@@ -2,7 +2,7 @@
     @foreach ($menus as $menu)
         @if ($menu->is_header)
         <div class="dropdown nav-item">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="menu-{{$menu->id}}"
+            <button class="btn btn-secondary dropdown-toggle p-0" type="button" id="menu-{{$menu->id}}"
               data-bs-toggle="dropdown" aria-expanded="false">
               {{$menu->name}}
             </button>

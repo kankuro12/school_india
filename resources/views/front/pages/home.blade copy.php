@@ -34,8 +34,8 @@
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             @foreach ($abouts as $about)
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link active" id="about-tab" data-bs-toggle="tab" data-bs-target="#about-{{$about->id}}"
-                                    type="button" role="tab" aria-controls="about" aria-selected="true">Home</button>
+                                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
+                                    type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
                             </li>
                             @endforeach
                             <li class="nav-item" role="presentation">
