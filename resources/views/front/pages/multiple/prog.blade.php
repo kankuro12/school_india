@@ -1,4 +1,4 @@
-@extends('front.layout.app')
+@extends('front.app')
 @section('content')
     <div id="single-page">
         <div class="jumbo">

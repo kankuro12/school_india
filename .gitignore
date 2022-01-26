@@ -14,3 +14,5 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
+/resources/views/front/pages/home/slider.blade.php
+/resources/views/front/layout/
