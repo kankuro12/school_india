@@ -79,9 +79,13 @@ Author: Chhatraman Shrestha
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: flex-start;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0px;
   height: 50px;
   padding: 10px 70px;
   background: var(--color-blue);
+  z-index: 112;
 }
 
 .header-bottom .nav-item {
@@ -108,8 +112,8 @@ Author: Chhatraman Shrestha
   position: absolute;
   inset: 0px auto auto 0px;
   margin: 0px;
-  -webkit-transform: translate(0px, 32px);
-          transform: translate(0px, 32px);
+  -webkit-transform: translate(0px, 26px);
+          transform: translate(0px, 26px);
 }
 
 .header-bottom .nav-item .dropdown-menu {
@@ -128,6 +132,7 @@ Author: Chhatraman Shrestha
 }
 
 .header-mobile {
+  z-index: 112;
   display: none;
 }
 
@@ -160,6 +165,9 @@ Author: Chhatraman Shrestha
     display: none;
   }
   .header-mobile {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0px;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -169,10 +177,12 @@ Author: Chhatraman Shrestha
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
-    padding: 10px 15px;
+    background-color: rgba(255, 255, 255, 0.973);
+    padding: 5px 15px;
+    z-index: 1;
   }
   .header-mobile img {
-    height: 50px;
+    height: 80px;
   }
   .header-mobile button {
     height: 35px;
@@ -328,19 +338,19 @@ Author: Chhatraman Shrestha
 #home-page .owl-home .item {
   z-index: 1;
   background-position: center center;
-  background-size: cover;
+  background-size: 100% 100%;
   min-height: 400px;
   background-image: var(--image);
 }
 
 #home-page .owl-home .item .inner {
-  padding: 150px 525px 300px 125px;
+  padding: 50px 525px 200px 125px;
   background: rgba(0, 0, 0, 0.5);
 }
 
 #home-page .owl-home .item .inner h5 {
   color: #ffffff;
-  font-size: 50px;
+  font-size: 30px;
   font-weight: 900;
   line-height: 60px;
   margin-bottom: 21px;
@@ -376,8 +386,8 @@ Author: Chhatraman Shrestha
 
 #home-page .page-inner {
   background: white;
-  -webkit-transform: translateY(-150px);
-          transform: translateY(-150px);
+  -webkit-transform: translateY(-130px);
+          transform: translateY(-130px);
   margin: 0px 150px;
   z-index: 111;
   position: relative;
@@ -415,15 +425,17 @@ Author: Chhatraman Shrestha
   font-size: 0.95rem;
   display: block;
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--color-black);
-  padding: 5px 0px;
+  padding: 10px 0px;
   border-bottom: 1px solid var(--color-grey);
 }
 
 #home-page .page-inner .home-notices .notice .more {
   color: var(--color-blue);
   display: inline-block;
+  font-weight: 700;
+  padding-left: 10px;
 }
 
 #home-page .page-inner .home-notices .notice:last-child {
@@ -509,8 +521,8 @@ Author: Chhatraman Shrestha
 
 #home-page .programs {
   padding: 75px 150px;
-  -webkit-transform: translateY(-150px);
-          transform: translateY(-150px);
+  -webkit-transform: translateY(-130px);
+          transform: translateY(-130px);
 }
 
 #home-page .programs .title {
@@ -541,6 +553,36 @@ Author: Chhatraman Shrestha
   width: 665px;
 }
 
+#home-page .programs .program {
+  -webkit-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+          box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+#home-page .programs .program:hover {
+  -webkit-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3) !important;
+          box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3) !important;
+}
+
+#home-page .programs .program:hover .image {
+  overflow: hidden;
+}
+
+#home-page .programs .program:hover .image img {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+
+#home-page .programs .program .image {
+  overflow: hidden;
+}
+
+#home-page .programs .program .image img {
+  -webkit-transition: -webkit-transform 1s;
+  transition: -webkit-transform 1s;
+  transition: transform 1s;
+  transition: transform 1s, -webkit-transform 1s;
+}
+
 #home-page .programs .program .program-desc h5 {
   font-size: 20px;
   font-weight: 700;
@@ -556,6 +598,8 @@ Author: Chhatraman Shrestha
   font-weight: 400;
   line-height: 23px;
   margin-bottom: 26px;
+  height: 69px;
+  overflow: hidden;
 }
 
 #home-page .programs .program .program-desc a {
@@ -575,12 +619,17 @@ Author: Chhatraman Shrestha
   -webkit-transition: color 0.3s ease 0s;
   transition: color 0.3s ease 0s;
   vertical-align: middle;
+  cursor: pointer;
+}
+
+#home-page .programs .program .program-desc a:hover {
+  background-color: var(--color-yellow-lite);
 }
 
 #home-page .why {
   background: var(--color-blue-dark1);
-  -webkit-transform: translateY(-150px);
-          transform: translateY(-150px);
+  -webkit-transform: translateY(-130px);
+          transform: translateY(-130px);
 }
 
 #home-page .why .facilities {
@@ -621,9 +670,14 @@ Author: Chhatraman Shrestha
 
 #home-page .why .facilities .contents .facility {
   background: rgba(0, 0, 0, 0.1);
+  cursor: pointer;
   text-align: center;
   padding: 30px 10px;
   margin-bottom: 20px;
+}
+
+#home-page .why .facilities .contents .facility:hover {
+  background: rgba(255, 182, 6, 0.2);
 }
 
 #home-page .why .facilities .contents .facility img {
@@ -666,9 +720,9 @@ Author: Chhatraman Shrestha
 }
 
 #home-page .events {
-  padding: 75px 150px;
-  -webkit-transform: translateY(-150px);
-          transform: translateY(-150px);
+  padding: 30px 150px;
+  -webkit-transform: translateY(-130px);
+          transform: translateY(-130px);
 }
 
 #home-page .events .title {
@@ -701,9 +755,17 @@ Author: Chhatraman Shrestha
 }
 
 #home-page .events .event {
+  -webkit-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+          box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+  cursor: pointer;
   text-decoration: none;
   color: inherit;
   display: block;
+}
+
+#home-page .events .event:hover {
+  -webkit-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3) !important;
+          box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3) !important;
 }
 
 #home-page .events .event img {
@@ -730,6 +792,12 @@ Author: Chhatraman Shrestha
 #home-page .events .event .event-desc h5 {
   font-weight: 700;
   font-size: 1.3rem;
+  line-height: 1.5rem;
+  height: 2.8rem;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 #home-page .events .event .event-desc p {
@@ -739,6 +807,8 @@ Author: Chhatraman Shrestha
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+  line-height: 1.1rem;
+  height: 2.2rem;
 }
 
 #home-page .events .event .event-desc .span {
@@ -850,6 +920,439 @@ Author: Chhatraman Shrestha
   }
 }
 
+#single-page .jumbo {
+  background: #EBE9E5;
+  padding: 70px 110px;
+}
+
+#single-page .jumbo a, #single-page .jumbo span {
+  font-size: 25px;
+  font-weight: 600;
+  text-decoration: none;
+  color: inherit;
+}
+
+#single-page .jumbo a:last-child::after, #single-page .jumbo span:last-child::after {
+  content: "";
+  padding: 0px;
+}
+
+#single-page .jumbo a::after, #single-page .jumbo span::after {
+  content: "/";
+  padding: 0px 5px;
+  color: black !important;
+}
+
+#single-page .jumbo a:hover {
+  color: var(--color-yellow-lite);
+}
+
+#single-page .content {
+  padding: 30px 0px;
+}
+
+#single-page .content .feature-image {
+  background: var(--bg-grey);
+  text-align: center;
+  min-height: 200px;
+}
+
+#single-page .content .feature-image img {
+  width: 100%;
+}
+
+#single-page .content .title {
+  font-size: 25px;
+  font-weight: 700;
+  padding: 20px 0px;
+}
+
+#single-page .content .short-desc {
+  font-size: 15px;
+  padding: 15px 0px;
+}
+
+#single-page .content .short-desc {
+  font-size: 15px;
+  padding: 15px 0px;
+}
+
+#single-page .content .short-desc p {
+  margin-bottom: 0.5rem;
+}
+
+#single-page .tabs {
+  padding: 20px 0px;
+}
+
+#single-page .tabs .nav-tabs .nav-item .nav-link {
+  color: inherit;
+}
+
+#single-page .tabs .nav-tabs .nav-item .nav-link.active {
+  color: var(--color-yellow-lite);
+}
+
+#single-page .tabs .tab-content {
+  border: 1px solid #dee2e6;
+  border-top: none;
+  border-bottom-left-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+  min-height: 200px;
+}
+
+#single-page .events .single-event {
+  padding-bottom: 30px;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+#single-page .events .single-event:hover::after {
+  background-color: var(--color-yellow-lite);
+}
+
+#single-page .events .single-event::after {
+  content: '';
+  height: 1px;
+  position: absolute;
+  background-color: var(--bg-grey);
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  -webkit-box-shadow: 0px 0px 10px 0px var(--bg-grey);
+          box-shadow: 0px 0px 10px 0px var(--bg-grey);
+}
+
+#single-page .events .single-event:last-of-type::after {
+  display: none;
+}
+
+#single-page .events .single-event .title {
+  padding: 5px 0px;
+  font-size: 18px;
+}
+
+#single-page .events .single-event small {
+  color: var(--color-grey);
+}
+
+#single-page .events .single-event .fa-holder {
+  color: var(--color-yellow-lite);
+}
+
+#single-page .events .single-event .desc {
+  margin: 10px 0px 10px 0px;
+  font-size: 14px;
+  font-weight: 400;
+  height: 36px;
+  line-height: 18px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+#single-page .events .single-event .view-detail {
+  text-decoration: none;
+  padding: 8px 12px;
+  font-size: 14px;
+  font-weight: 500;
+  background: var(--color-black);
+  color: white;
+  border-radius: 5px;
+}
+
+#single-page .events .single-event .view-detail:hover {
+  background-color: var(--color-yellow-lite);
+}
+
+#single-page .notices .single-notice {
+  position: relative;
+}
+
+#single-page .notices .single-notice:last-of-type::after {
+  display: none;
+}
+
+#single-page .notices .single-notice:hover::after {
+  background-color: var(--color-yellow-lite);
+}
+
+#single-page .notices .single-notice::after {
+  content: '';
+  height: 1px;
+  position: absolute;
+  background-color: var(--bg-grey);
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  -webkit-box-shadow: 0px 0px 10px 0px var(--bg-grey);
+          box-shadow: 0px 0px 10px 0px var(--bg-grey);
+}
+
+#single-page .notices .single-notice .title {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+#single-page .notices .single-notice .title a {
+  text-decoration: none;
+  color: inherit;
+}
+
+#single-page .notices .single-notice .notice-download {
+  color: var(--color-yellow-lite);
+  text-decoration: none;
+  display: inline-block;
+  padding-left: 10px;
+  padding-bottom: 10px;
+}
+
+#single-page .gallery .item {
+  width: 25%;
+  border: 1px solid white;
+  overflow: hidden;
+  background-color: black;
+}
+
+#single-page .gallery .item:hover img {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+
+#single-page .gallery .item img {
+  width: 100%;
+  -webkit-transition: all 1s;
+  transition: all 1s;
+}
+
+#modal-image-holder {
+  position: relative;
+}
+
+#modal-image-holder span {
+  position: absolute;
+  height: 40px;
+  width: 40px;
+  background: rgba(0, 0, 0, 0.5);
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+#modal-image-holder span.next {
+  right: 5px;
+}
+
+#modal-image-holder span.prev {
+  left: 5px;
+}
+
+@media (max-width: 425px) {
+  #single-page .jumbo {
+    padding: 40px 10px;
+    text-align: center;
+  }
+  #single-page .jumbo a, #single-page .jumbo span {
+    font-size: 25px;
+    font-weight: 600;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    text-align: center;
+  }
+  #single-page .jumbo a::after, #single-page .jumbo span::after {
+    content: "";
+    padding: 0px 0px;
+    color: black !important;
+  }
+  #single-page .jumbo a:hover {
+    color: var(--color-yellow-lite);
+  }
+  #single-page .content {
+    padding: 10px 0px;
+  }
+  #single-page .content .feature-image {
+    min-height: auto;
+  }
+  #single-page .content .title {
+    font-size: 20px;
+    padding: 10px 0px;
+  }
+  #single-page .content .short-desc {
+    font-size: 15px;
+    padding: 10px 0px 0px 0px;
+  }
+  #single-page .content .desc {
+    font-size: 15px;
+    padding: 10px  0px 0px 0px;
+  }
+  #single-page .content .desc p {
+    margin-bottom: 0.5rem;
+  }
+  #single-page .tabs {
+    padding: 20px 0px;
+  }
+  #single-page .tabs .nav-tabs {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+  }
+  #single-page .tabs .nav-tabs .nav-item .nav-link {
+    border: none !important;
+    color: inherit;
+    padding: 10px 15px;
+  }
+  #single-page .tabs .nav-tabs .nav-item .nav-link.active {
+    color: white;
+    background-color: var(--color-yellow-lite);
+  }
+  #single-page .tabs .tab-content {
+    border: 1px solid var(--color-yellow-lite);
+    border-bottom-left-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+    min-height: 200px;
+  }
+  #single-page .events .single-event {
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+    position: relative;
+  }
+  #single-page .events .single-event:hover .title {
+    font-size: 18px;
+  }
+  #single-page .events .single-event:hover::after {
+    background-color: var(--color-yellow-lite);
+  }
+  #single-page .events .single-event::after {
+    content: '';
+    height: 1px;
+    position: absolute;
+    background-color: var(--bg-grey);
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    -webkit-box-shadow: 0px 0px 10px 0px var(--bg-grey);
+            box-shadow: 0px 0px 10px 0px var(--bg-grey);
+  }
+  #single-page .events .single-event:last-of-type::after {
+    display: none;
+  }
+  #single-page .events .single-event .title {
+    padding: 5px 0px;
+    font-size: 18px;
+  }
+  #single-page .events .single-event small {
+    color: var(--color-grey);
+  }
+  #single-page .events .single-event .fa-holder {
+    color: var(--color-yellow-lite);
+  }
+  #single-page .events .single-event .desc {
+    margin: 10px 0px 10px 0px;
+    font-size: 14px;
+    font-weight: 400;
+    height: 40px;
+    line-height: 15px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+  #single-page .events .single-event .view-detail {
+    text-decoration: none;
+    padding: 8px 12px;
+    font-size: 14px;
+    font-weight: 500;
+    background: var(--color-black);
+    color: white;
+    border-radius: 5px;
+  }
+  #single-page .events .single-event .view-detail:hover {
+    background-color: var(--color-yellow-lite);
+  }
+  #single-page .notices .single-notice .title {
+    font-size: 15px;
+  }
+  #single-page .notices .single-notice .title a {
+    text-decoration: none;
+    color: inherit;
+  }
+  #single-page .notices .single-notice .notice-download {
+    color: var(--color-yellow-lite);
+    text-decoration: none;
+    display: inline-block;
+    padding-left: 0px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-right: 10px;
+  }
+  #single-page .gallery {
+    -webkit-columns: 2;
+            columns: 2;
+    -webkit-column-gap: 0px;
+            column-gap: 0px;
+  }
+  #single-page .gallery .item {
+    border: 1px solid white;
+    cursor: pointer;
+    overflow: hidden;
+  }
+  #single-page .gallery .item:hover img {
+    -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+  }
+  #single-page .gallery .item img {
+    width: 100%;
+    -webkit-transition: all 1s;
+    transition: all 1s;
+  }
+  #modal-image-holder {
+    position: relative;
+  }
+  #modal-image-holder span {
+    position: absolute;
+    height: 30px;
+    width: 30px;
+    background: rgba(0, 0, 0, 0.5);
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    font-size: 18px;
+  }
+  #modal-image-holder span.next {
+    right: 5px;
+  }
+  #modal-image-holder span.prev {
+    left: 5px;
+  }
+}
+
 * {
   font-family: 'Open Sans', sans-serif;
   --color-red:#bd1c00;
@@ -857,6 +1360,8 @@ Author: Chhatraman Shrestha
   --color-blue:#0C314E;
   --color-blue-dark:#415E96;
   --color-blue-dark1:#0C314E;
+  --color-blue-alt:#05A4ED;
+  --color-red-alt:#FE3F40;
   --bg-grey:#F6F6F6;
   --color-grey:#6f6f6f;
   --color-black:#4b4b4b;
@@ -872,3 +1377,4 @@ Author: Chhatraman Shrestha
 .text-grey {
   color: var(--color-grey);
 }
+/*# sourceMappingURL=main.css.map */

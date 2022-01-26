@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AcademicYearController;
 use App\Http\Controllers\Admin\AssessmentController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\EmployeeController;
+use App\Http\Controllers\Admin\EventController;
 use App\Http\Controllers\Admin\ExamController;
 use App\Http\Controllers\Admin\ExamSubjectController;
 use App\Http\Controllers\Admin\FooterController;
@@ -68,6 +69,12 @@ Route::prefix('admin')->name('admin.')->group(function(){
             Route::match(['get', 'post'],'edit/{page}',[PageController::class,'edit'])->name('edit');
             Route::match(['get', 'post'],'del/{page}',[PageController::class,'del'])->name('del');
             Route::match(['get', 'post'],'delDoc',[PageController::class,'delDoc'])->name('delDoc');
+        });
+        Route::prefix('event')->name('event.')->group(function(){
+            Route::get('',[EventController::class,'index'])->name('index');
+            Route::match(['get', 'post'],'add/',[EventController::class,'add'])->name('add');
+            Route::match(['get', 'post'],'edit/{event}',[EventController::class,'edit'])->name('edit');
+            Route::match(['get', 'post'],'del/{event}',[EventController::class,'del'])->name('del');
         });
         Route::prefix('setting')->name('setting.')->group(function(){
             Route::match(['GET','POST'],'@{type}',[AdminSettingController::class,'index'])->name('index');

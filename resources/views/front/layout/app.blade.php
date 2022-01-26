@@ -20,14 +20,14 @@
 <body>
   <header>
     @include('front.layout.top')
-    @include('front.layout.bottom')
-    <div class="header-mobile">
-      <img src="/uploads/setting/logo.jpg" alt="">
-      <button data-mode="toogle-sidebar">
-        <i class="fas fa-bars"></i>
-      </button>
-    </div>
   </header>
+  @include('front.layout.bottom')
+  <div class="header-mobile">
+    <img src="/uploads/setting/logo.jpg" alt="">
+    <button data-mode="toogle-sidebar">
+      <i class="fas fa-bars"></i>
+    </button>
+  </div>
   @yield('content')
   @include('front.layout.footer')
   

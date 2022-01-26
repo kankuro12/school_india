@@ -4,23 +4,13 @@
         <div class="col-md-3">
             <div class="footer-element">
               <div class="title">
-                About asdfasdfasf
+                About PUSOE
               </div>
               <div class="inner">
                 <div>
-                    asdfasfasdf
+                    sdfasdf
                 </div>
                 <ul class="mt-3">
-                                            <li>
-                            <a href="asdfasdf">
-                                sadfasfsd 
-                            </a>
-                        </li>          
-                                            <li>
-                            <a href="asdfasfd">
-                                asdfasfd 
-                            </a>
-                        </li>          
                                     </ul>
               </div>
              
@@ -34,11 +24,6 @@
             </div>
             <div class="inner">
               <ul class="footer-list">
-                                <li>
-                        <a href="sdfasdf">
-                            asdfsadf 
-                        </a>
-                    </li>          
                               </ul>
             </div>
           </div>
@@ -50,11 +35,6 @@
             </div>
             <div class="inner">
               <ul class="footer-list">
-                                    <li>
-                        <a href="sdfasdf">
-                            asdfsadf 
-                        </a>
-                    </li>          
                                 
               </ul>
             </div>
@@ -64,7 +44,7 @@
           <div class="footer-element no">
             <div class="gmap_canvas">
               <iframe  id="gmap_canvas"
-              src="https://maps.google.com/maps?q=Need Technosoft&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"
+              src="https://maps.google.com/maps?q=PUSoe&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"
               scrolling="no" marginheight="0" marginwidth="0"></iframe>
         
             </div>
