@@ -45,7 +45,7 @@ class SettingController extends Controller
             if(isset($data[2])){
                 file_put_contents(resource_path($data[2]),view('admin.setting.template.'.$type,compact('curdata'))->render());
             }else{
-                file_put_contents(resource_path('views\front\layout\\'.$type.'.blade.php'),view('admin.setting.template.'.$type,compact('curdata'))->render());
+                file_put_contents(resource_path('views/front/layout/'.$type.'.blade.php'),view('admin.setting.template.'.$type,compact('curdata'))->render());
             }
             return redirect()->back();
         

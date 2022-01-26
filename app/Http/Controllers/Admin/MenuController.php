@@ -82,7 +82,7 @@ class MenuController extends Controller
     private function render()
     {
         $menus=Menu::whereNull('parent_id')->get();
-        file_put_contents( resource_path('views\front\layout\bottom.blade.php'),view('admin.menu.template',compact('menus'))->render());
+        file_put_contents( resource_path('views/front/layout/bottom.blade.php'),view('admin.menu.template',compact('menus'))->render());
     }
 
    

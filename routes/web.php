@@ -40,7 +40,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('',[HomeController::class,'index'])->name('home');
 Route::get('image',[HomeController::class,'image'])->name('image');
 Route::get('page/@{type}',[HomeController::class,'pageType'])->name('page.type');
-Route::get('page/{id}',[HomeController::class,'page'])->name('page');
+Route::get('page/{id}',[HomeController::class,'page'])->name('event');
+
+Route::get('events',[HomeController::class,'events'])->name('events');
+Route::get('event/{id}',[HomeController::class,'event'])->name('page');
 
 Route::prefix('admin')->name('admin.')->group(function(){
     Route::middleware('guest')->group(function(){

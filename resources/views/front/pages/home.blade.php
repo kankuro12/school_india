@@ -160,7 +160,7 @@
                 @foreach ($news as $singleNews)
                     
                 <div class="col-md-4">
-                    <a class="event " href="{{route('page',['id'])}}">
+                    <a class="event " href="{{route('event',['id'])}}">
                         <img src="{{asset($singleNews->image)}}"
                             alt="">
                         <div class="event-desc">

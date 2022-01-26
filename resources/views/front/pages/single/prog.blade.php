@@ -2,8 +2,9 @@
 @section('content')
 <div id="single-page">
     <div class="jumbo">
-      <a class="link" href="">Lorem</a>
-      <span class="link">Lorem</span>
+      <a class="link" href="/">Home</a>
+      <a class="link" href="{{route('page.type',['type'=>$data->type])}}">Programs</a>
+      <span class="link">{{$data->title}}</span>
     </div>
     <div class="content">
       <div class="container">

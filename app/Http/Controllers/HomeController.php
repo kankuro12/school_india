@@ -29,6 +29,13 @@ class HomeController extends Controller
     public function image(){
         
     }
+    public function pageType($type)
+    {
+        $data=Page::where('type',$type)->get();
+        $pageType=Data::pageTypes[$type];
+        return view('front.pages.multiple.'.$type,compact('data','pageType'));
+    }
+
 
     public function page($id){
         $data=Page::find($id);
@@ -36,5 +43,13 @@ class HomeController extends Controller
         $others=Page::where('type',$data->type)->where('id','<>',$id)->take(2)->get();
         // dd($page);
         return view('front.pages.single.'.$data->type,compact('data','type','others'));
+    }
+
+    public function event($id){
+        $data=Event::find($id);
+       
+        $others=Event::where('id','<>',$id)->take(2)->get();
+        // dd($data);
+        return view('front.pages.single.event',compact('data','others'));
     }
 }
