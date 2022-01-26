@@ -77,7 +77,7 @@
       <div class="row">
         <div class="col-md-6 mb-2">
           <div class="social-links d-flex justify-content-center justify-content-md-start align-items-center">
-            <a href="https://www.facebook.com/puschoolofengineering" class="social-link">
+            <a href="https://www.facebook.com/puschoolofengineering" class="social-link" target="_blank">
               <i class="fab fa-facebook-f"></i>
             </a>
           </div>

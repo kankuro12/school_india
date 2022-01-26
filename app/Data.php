@@ -44,6 +44,11 @@ class Data
         'fac'=>['Facility','Facilities',[],false,null,true,'Description'],
         'fau'=>['Faculty','Faculties',[],false,null,true,'Description'],
         'not'=>['Notice','Notics',[],true,'file|single|Downloads',false,'Content'],
+        'msg'=>['Message From','Message From',[
+            'msg_1'=>'Person Name',
+            'msg_2'=>'Person Designaton',
+            'msg_3'=>'Person contact',
+        ],true,null,false,'Content'],
         'prog'=>['Program','Programs',[
             'prog_01'=>'Fee Structre',
             'prog_02'=>'Lab',

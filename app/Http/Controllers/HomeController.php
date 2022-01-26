@@ -33,7 +33,8 @@ class HomeController extends Controller
     public function page($id){
         $data=Page::find($id);
         $type=Data::pageTypes[$data->type];
+        $others=Page::where('type',$data->type)->where('id','<>',$id)->take(2)->get();
         // dd($page);
-        return view('front.pages.single.'.$data->type,compact('data','type'));
+        return view('front.pages.single.'.$data->type,compact('data','type','others'));
     }
 }
