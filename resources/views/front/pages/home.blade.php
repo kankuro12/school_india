@@ -113,7 +113,7 @@
                 @foreach ($events as $event)
                     
                     <div class="col-md-4">
-                        <a class="event " href="{{route('page',['id'=>$event->id])}}">
+                        <a class="event " href="{{route('event',['id'=>$event->id])}}">
                             <img src="{{asset($event->image)}}"
                                 alt="">
                             <div class="event-desc">
@@ -160,7 +160,7 @@
                 @foreach ($news as $singleNews)
                     
                 <div class="col-md-4">
-                    <a class="event " href="{{route('event',['id'])}}">
+                    <a class="event " href="{{route('page',['id'=>$singleNews->id])}}">
                         <img src="{{asset($singleNews->image)}}"
                             alt="">
                         <div class="event-desc">

@@ -31,7 +31,7 @@ class HomeController extends Controller
     }
     public function pageType($type)
     {
-        $data=Page::where('type',$type)->get();
+        $data=Page::where('type',$type)->latest()->get();
         $pageType=Data::pageTypes[$type];
         return view('front.pages.multiple.'.$type,compact('data','pageType'));
     }
@@ -45,6 +45,11 @@ class HomeController extends Controller
         return view('front.pages.single.'.$data->type,compact('data','type','others'));
     }
 
+    public function events(){
+        $data=Event::paginate(10);
+        return view('front.pages.multiple.event',compact('data'));
+
+    }
     public function event($id){
         $data=Event::find($id);
        

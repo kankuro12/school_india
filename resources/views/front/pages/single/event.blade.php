@@ -22,12 +22,12 @@
                     <span class="text-yellow-lite pe-1">
                       <i class="fas fa-calendar-alt"></i>
                     </span>
-                    <span class="fw-bolder">
+                    <span class="">
                         {{$data->start->format('jS M, Y')}}
                   
                     </span>
                     -
-                    <span class="fw-bolder">
+                    <span class="">
                         {{$data->end->format('jS M, Y')}}
 
                     </span>
@@ -38,11 +38,11 @@
                     <span class="text-yellow-lite pe-1">
                       <i class="fas fa-clock"></i>
                     </span>
-                    <span class="fw-bolder">
+                    <span class="">
                       {{$data->start_time}}
                     </span>
                     -
-                    <span class="fw-bolder">
+                    <span class="">
                         {{$data->end_time}}
 
                     </span>
@@ -54,7 +54,7 @@
                     <span class="text-yellow-lite pe-1">
                       <i class="fas fa-map-marker-alt me-1"></i>
                     </span>
-                    <span class="fw-bolder">
+                    <span class="">
                       {{$data->addr}}
                     </span>
   
