@@ -337,6 +337,7 @@
             etypeChanged($('#etype')[0]);
             $('#eid').val(id);
             $('#ename').val($('#input-title-' + id).val());
+            $('#esn').val($('#input-sn-' + id).val());
             $('#update-modal').modal('show');
         }
     </script>

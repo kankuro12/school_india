@@ -10,6 +10,6 @@ class Menu extends Model
     use HasFactory;
     public function childs()
     {
-        return Menu::where('parent_id',$this->id)->get();
+        return Menu::where('parent_id',$this->id)->orderBy('sn','asc')->get();
     }
 }

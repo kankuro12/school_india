@@ -58,6 +58,8 @@ class MenuController extends Controller
     {
         $menu = new Menu();
         $menu->name = $request->name;
+        $menu->sn = $request->sn??0;
+
         $menu->parent_id = $request->parent_id != 0 ? $request->parent_id : null;
         switch ($request->type) {
             case 1:
@@ -82,7 +84,7 @@ class MenuController extends Controller
 
     private function render()
     {
-        $menus=Menu::whereNull('parent_id')->get();
+        $menus=Menu::whereNull('parent_id')->orderBy('sn','asc')->get();
         file_put_contents( resource_path('views/front/layout/bottom.blade.php'),view('admin.menu.template',compact('menus'))->render());
     }
 

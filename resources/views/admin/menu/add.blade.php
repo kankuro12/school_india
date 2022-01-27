@@ -45,6 +45,10 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="col-md-3">
+                            <label for="sn">SN</label>
+                            <input type="number" name="sn" id="sn" class="form-control" value="0">
+                        </div>
                         <div class="col-md-3" id="extra-link-wrapper">
                             <div class="form-group" >
                                 <label for="extra-links">extra-links</label>
@@ -52,7 +56,7 @@
                             </div>
                         </div>
                         <div>
-                            
+
                         </div>
 
                         <div class=" col-md-3 d-flex align-items-end">

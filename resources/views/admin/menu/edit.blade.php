@@ -50,6 +50,10 @@
                                 <input type="text" name="extra_links" id="eextra-links" class="form-control">
                             </div>
                         </div>
+                        <div class="col-md-3">
+                            <label for="sn">SN</label>
+                            <input type="number" name="sn" id="esn" class="form-control" value="0">
+                        </div>
                         <div class=" col-md-3 d-flex align-items-end">
                             <div class="form-group">
 
