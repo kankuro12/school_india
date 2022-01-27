@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGalleryTypesTable extends Migration
+class AddIndexToMenusTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateGalleryTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('gallery_types', function (Blueprint $table) {
-            $table->id();
-            $table->text('icon')->nullable();
-            $table->string('name',160);
-            $table->timestamps();
+        Schema::table('menus', function (Blueprint $table) {
+            //
+            $table->integer('sn')->default(0);
         });
     }
 
@@ -28,6 +26,9 @@ class CreateGalleryTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('gallery_types');
+        Schema::table('menus', function (Blueprint $table) {
+            //
+            $table->dropColumn('sn');
+        });
     }
 }

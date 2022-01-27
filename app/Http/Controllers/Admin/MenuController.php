@@ -12,7 +12,7 @@ class MenuController extends Controller
     //
     public function index()
     {
-        $menus = DB::select("select id,name,is_header,link, (select group_concat(id,'|',name,'|',link) from menus where parent_id=m.id) as childs from menus m where parent_id is null");
+        $menus = DB::select("select id,name,is_header,link,sn, (select group_concat(id,'|',name,'|',link,'|',sn ) from menus where parent_id=m.id) as childs from menus m where parent_id is null");
         $pages = DB::table('pages')->select('id', 'type', 'title')->get();
         return view('admin.menu.index', compact('menus', 'pages'));
     }

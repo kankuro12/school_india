@@ -49,7 +49,7 @@
             </div>
             <div class="inner">
               <ul class="footer-list">
-                @foreach ($footer2 as $link)
+                @foreach ($footer3 as $link)
                     <li>
                         <a href="{{$link->title}}">
                             {{$link->link}} 
