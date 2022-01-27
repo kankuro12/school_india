@@ -29,12 +29,15 @@
                 <div class="col-md-6">
                     <div class="about-tabs">
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
-                            @foreach ($abouts as $about)
+                            @php  $i=0; @endphp
+                            @foreach ($setting->about_title as $title)
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link active" id="about-tab" data-bs-toggle="tab"
-                                        data-bs-target="#about-{{ $about->id }}" type="button" role="tab"
-                                        aria-controls="about" aria-selected="true">{{ $about->title }}</button>
+                                    <button class="nav-link {{$i++==0?'active':''}}" id="about-tab" data-bs-toggle="tab"
+                                        data-bs-target="#about-{{ $title->id }}" type="button" role="tab"
+                                        aria-controls="about" aria-selected="true">{{ $title->title }}</button>
                                 </li>
+                            @php  $i+=1; @endphp
+
                             @endforeach
                         </ul>
                         <!-- <hr class="mt-1"> -->

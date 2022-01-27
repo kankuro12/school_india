@@ -63,11 +63,19 @@
                                 $desc=(array)(json_decode($page->desc));
                             @endphp
                             @foreach ($pageType[2] as $key => $descType)
-                                <div>
-                                    <label for="{{ $key }}">{{ $descType }}</label>
-                                    <textarea name="{{ $key }}" id="{{ $key }}" cols="30" rows="10"
-                                        class="form-control desc">{{$desc[$key]}}</textarea>
-                                </div>
+                            @php
+                            $d=explode('|',$descType);
+                            @endphp
+                            @if(count($d)>1)
+                            <label for="{{ $key }}">{{ $d[0] }}</label>
+                            <input type="{{$d[1]}}" name="{{ $key }}" id="{{ $key }}" value="{{$desc[$key]}}"  class="form-control">
+                            @else
+                            <div>
+                                <label for="{{ $key }}">{{ $descType }}</label>
+                                <textarea name="{{ $key }}" id="{{ $key }}" cols="30" rows="10"
+                                    class="form-control desc">{!!$desc[$key]??''!!}</textarea>
+                            </div>
+                            @endif
                             @endforeach
                         @else
                             <div>

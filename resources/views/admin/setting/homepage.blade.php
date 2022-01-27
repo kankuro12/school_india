@@ -54,12 +54,30 @@
                         <label for="news">Lastest news Summary</label>
                         <textarea name="news" id="news"  class="form-control" required>{{$data->news}}</textarea>
                     </div>
+                    @php
+                        
+                        $about_title=[];
+                        if(isset($data->about_title)){
+                            $about_title=(array)($data->about_title);
+                        }
+                    @endphp
                     @foreach ($abouts as $about)
                         <div class="col-md-6 py-2">
                             <input type="checkbox" name="about[]" id="about-{{$about->id}}" {{in_array($about->id,$data->about)?'checked':''}} value="{{$about->id}}">
-                            <label for="about-{{$about->id}}">{{$about->title}}</label>
+                            <label for="about-{{$about->id}}">{{$about->title}}</label> 
+                            @php
+                                $value=$about->title;
+                                    if(in_array($about->id,$data->about)){
+                                        $abt=$about_title['about_'.$about->id];
+                                        if(isset($abt)){
+                                            $value=$abt->title;
+                                        } 
+                                    }
+                            @endphp
+                            <input type="text" name="about_{{$about->id}}" value="{{$value}}" id="about_{{$about->id}}" class="form-control">
                         </div>
                     @endforeach
+                   
                 </div>
                 <div class="py-2">
                     <button class="btn btn-primary">Save Home Page Setting</button>

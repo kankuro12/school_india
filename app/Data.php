@@ -43,18 +43,20 @@ class Data
         'news'=>['News','News',[],false,'gallery|multiple|Gallery',true,'Content'],
         'fac'=>['Facility','Facilities',[],false,null,true,'Description'],
         'fau'=>['Faculty','Faculties',[],false,null,true,'Description'],
-        'not'=>['Notice','Notics',[],true,'file|single|Downloads',false,'Content'],
+        'not'=>['Notice','Notices',[],true,'file|single|Downloads',false,'Content'],
         'msg'=>['Message From','Message From',[
-            'msg_1'=>'Person Name',
-            'msg_2'=>'Person Designaton',
-            'msg_3'=>'Person contact',
-        ],true,null,false,'Content'],
+            'msg_1'=>'Person Name|text',
+            'msg_2'=>'Person Designaton|text',
+            'msg_3'=>'Person contact|text',
+            'msg_4'=>'Long Message',
+        ],true,null,true,'Message'],
         'prog'=>['Program','Programs',[
             'prog_01'=>'Fee Structre',
             'prog_02'=>'Lab',
             'prog_03'=>'Scholorship Scheme',
             'prog_04'=>'Achivements'
-        ],true,'gallery|multiple|Gallery',true,'Description']
+        ],true,'gallery|multiple|Gallery',true,'Description'],
+        'club'=>['Club','Clubs',[],true,'gallery|multiple|Gallery',true,'Description']
     ];
 
     const assesments=[

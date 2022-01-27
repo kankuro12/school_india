@@ -61,19 +61,31 @@ class SettingController extends Controller
                 'why'=>'',
                 'event'=>'',
                 'news'=>'',
-                'about'=>[1,2]
+                'about'=>[],
+                'about_title'=>[],
+
             ]));
             // dd($data);
-            $abouts=DB::table('pages')->where('type','about')->select('id','title')->get();
+            $abouts=DB::table('pages')->where('type','about')->orWhere('type','msg')->select('id','title')->get();
             return view('admin.setting.homepage',compact('data','abouts'));
  
         }else{
+            $about=[];
+            if($request->filled('about')){
+                foreach ($request->about as $key => $abt) {
+                    $about['about_'.$abt]=[
+                        'id'=>$abt,
+                        'title'=>$request->filled('about_'.$abt)?$request->input('about_'.$abt):'About Us'
+                    ];
+                }
+            }
             $data=[
                 'program'=>$request->program,
                 'why'=>$request->why,
                 'event'=>$request->event,
                 'news'=>$request->news,
-                'about'=>$request->about??[]
+                'about'=>$request->about??[],
+                'about_title'=>$about,
             ];
             setSetting('homepage',$data);
             return redirect()->back()->with('message',"Setting Saved Sucessfully");

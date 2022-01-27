@@ -60,11 +60,19 @@
                         </div>
                         @if (count($pageType[2]) > 0)
                             @foreach ($pageType[2] as $key => $descType)
+                                @php
+                                    $d=explode('|',$descType);
+                                @endphp
+                                @if(count($d)>1)
+                                <label for="{{ $key }}">{{ $d[0] }}</label>
+                                <input type="{{$d[1]}}" name="{{ $key }}" id="{{ $key }}" class="form-control">
+                                @else
                                 <div>
                                     <label for="{{ $key }}">{{ $descType }}</label>
                                     <textarea name="{{ $key }}" id="{{ $key }}" cols="30" rows="10"
                                         class="form-control desc"></textarea>
                                 </div>
+                                @endif
                             @endforeach
                         @else
                             <div>

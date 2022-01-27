@@ -17,6 +17,7 @@ class HomeController extends Controller
     {
         $setting=getSetting('homepage');
         $abouts=DB::table('pages')->whereIn('id',$setting->about)->select('id','title','short_desc')->get();
+
         $news=Page::where('type','news')->take(4)->latest()->get(['id','title','short_desc','created_at','image']);
         $facilities=Page::where('type','fac')->take(4)->latest()->get(['id','title','short_desc','image']);
         $programs=Page::where('type','prog')->latest()->get(['id','title','short_desc','image']);
@@ -33,7 +34,19 @@ class HomeController extends Controller
     {
         $data=Page::where('type',$type)->latest()->get();
         $pageType=Data::pageTypes[$type];
-        return view('front.pages.multiple.'.$type,compact('data','pageType'));
+        if(in_array($type,['not'])){
+            return view('front.pages.multiple.not',compact('data','pageType'));
+        }
+        else if(in_array($type,['fac'])){
+            return view('front.pages.multiple.fac',compact('data','pageType'));
+
+        } else if(in_array($type,['msg'])){
+            return view('front.pages.multiple.msg',compact('data','pageType'));
+
+        }else{
+            return view('front.pages.multiplepage',compact('data','pageType'));
+
+        }
     }
 
 
@@ -45,7 +58,16 @@ class HomeController extends Controller
         $type=Data::pageTypes[$data->type];
         $others=Page::where('type',$data->type)->where('id','<>',$id)->take(5)->get();
         // dd($others);
-        return view('front.pages.single.'.$data->type,compact('data','type','others'));
+        // return view('front.pages.single.'.$data->type,compact('data','type','others'));
+        if(in_array($data->type,['not'])){
+            return view('front.pages.single.not',compact('data','type','others'));
+        
+        }else if(in_array($data->type,['msg'])){
+            return view('front.pages.single.msg',compact('data','type','others'));
+
+        }else{
+            return view('front.pages.singlepage',compact('data','type','others'));
+        }
     }
 
     public function events(){
