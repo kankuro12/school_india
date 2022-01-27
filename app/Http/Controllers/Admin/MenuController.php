@@ -39,6 +39,7 @@ class MenuController extends Controller
     {
         $menu = Menu::find($request->id);
         $menu->name = $request->name;
+        $menu->sn = $request->sn;
 
         switch ($request->type) {
             case 3:

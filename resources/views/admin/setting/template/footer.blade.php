@@ -33,8 +33,8 @@
               <ul class="footer-list">
                 @foreach ($footer2 as $link)
                 <li>
-                        <a href="{{$link->title}}">
-                            {{$link->link}} 
+                        <a href="{{$link->link}}">
+                            {{$link->title}} 
                         </a>
                     </li>          
                 @endforeach
@@ -51,8 +51,8 @@
               <ul class="footer-list">
                 @foreach ($footer3 as $link)
                     <li>
-                        <a href="{{$link->title}}">
-                            {{$link->link}} 
+                        <a href="{{$link->link}}">
+                            {{$link->title}} 
                         </a>
                     </li>          
                 @endforeach
