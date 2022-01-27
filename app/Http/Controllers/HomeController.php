@@ -39,9 +39,12 @@ class HomeController extends Controller
 
     public function page($id){
         $data=Page::find($id);
+        if($data->type=='fac'){
+            return redirect()->route('page.type',['type'=>$data->type]);
+        }
         $type=Data::pageTypes[$data->type];
-        $others=Page::where('type',$data->type)->where('id','<>',$id)->take(2)->get();
-        // dd($page);
+        $others=Page::where('type',$data->type)->where('id','<>',$id)->take(5)->get();
+        // dd($others);
         return view('front.pages.single.'.$data->type,compact('data','type','others'));
     }
 
@@ -53,7 +56,7 @@ class HomeController extends Controller
     public function event($id){
         $data=Event::find($id);
        
-        $others=Event::where('id','<>',$id)->take(2)->get();
+        $others=Event::where('id','<>',$id)->latest()->take(5)->get();
         // dd($data);
         return view('front.pages.single.event',compact('data','others'));
     }

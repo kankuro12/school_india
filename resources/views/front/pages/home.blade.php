@@ -89,11 +89,11 @@
                             <div class="row">
                                 @foreach ($facilities as $facility)    
                                     <div class="col-md-3">
-                                        <div class="facility">
+                                        <a href="{{route('page.type',['type'=>'fac'])}}" class="facility" >
                                             <img src="{{asset($facility->image)}}" alt="">
                                             <h5>{{$facility->title}}</h5>
                                             <p>{{$facility->short_desc}}</p>
-                                        </div>
+                                        </a>
                                     </div>
                                 @endforeach
                                 

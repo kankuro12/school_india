@@ -10,7 +10,7 @@
                 <div class="notices">
                     @foreach ($data  as $page)
                     <div class="single-notice">
-                        <div class="title">
+                        <div class="title p-0 pb-1">
                           <a href="{{route('page',['id'=>$page->id])}}">
             
                             {{$page->title}}

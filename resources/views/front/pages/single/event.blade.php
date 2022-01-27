@@ -9,7 +9,7 @@
     <div class="content">
       <div class="container">
         <div class="row">
-          <div class="col-md-9">
+          <div class="col-md-8">
             <div class="title">
                 {{$data->title}}
             </div>
@@ -71,7 +71,12 @@
           
            
           </div>
-          <div class="col-md-3"></div>
+          <div class="col-md-4">
+            <div class="title after">
+              Latest Events
+            </div>
+            @include('front.pages.single.event_min')
+          </div>
         </div>
         
 

@@ -35,7 +35,7 @@
               {{$data->short_desc}}
             </div>
             <div class="desc">
-              {{$data->desc}}
+              {!!$data->desc!!}
             </div>
               @php
                   $i=0;
@@ -53,7 +53,12 @@
               </div>
               @endif
           </div>
-          <div class="col-md-3"></div>
+          <div class="col-md-3">
+            <div class="title after">
+              Latest News
+            </div>
+            @include('front.pages.single.page_min')
+          </div>
         </div>
         
 
