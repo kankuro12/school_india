@@ -80,6 +80,7 @@
         <div class="header-menu " id="header-menu-xxx_id">
             <div class="header  ">
                 <input type="text" value="xxx_name" id="item-title-xxx_id">
+                <input type="number" value="xxx_sn" id="sn-xx_id">
                 <input type="hidden" value="xxx_link" id="item-link-xxx_id">
                 <span>
                     <button class="btn"><i class="material-icons" onclick="del(xxx_id)"> delete </i></button>
@@ -99,6 +100,7 @@
         <div class="normal-menu" id="normal-menu-xxx_id">
             <input type="text" id="input-title-xxx_id" class="input-title" value="xxx_name">
             <input type="text" id="input-link-xxx_id" class="input-link" value="xxx_link">
+            <input type="number" id="input-sn-xxx_id" class="input-sn" value="xxx_sn">
             <span class="btn-group">
                 <button class="btn"><i class="material-icons" onclick="del(xxx_id)"> delete </i></button>
                 <button class="btn"><i class="material-icons" onclick="initEdit(xxx_id)"> edit </i></button>
@@ -131,6 +133,7 @@
                                 id: subarr[0],
                                 name: subarr[1],
                                 link: subarr[2],
+                                sn: subarr[3],
                             })
                         });
                     }
@@ -207,6 +210,7 @@
             axios.post("{{ route('admin.menu.edit') }}", {
                     "id": id,
                     "name": $('#item-title-' + id).val(),
+                    "sn": $('#item-title-' + id).val(),
                     "type": 1
                 })
                 .then((res) => {
