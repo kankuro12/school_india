@@ -52,9 +52,9 @@ class HomeController extends Controller
 
     public function page($id){
         $data=Page::find($id);
-        if($data->type=='fac'){
-            return redirect()->route('page.type',['type'=>$data->type]);
-        }
+        // if($data->type=='fac'){
+        //     return redirect()->route('page.type',['type'=>$data->type]);
+        // }
         $type=Data::pageTypes[$data->type];
         $others=Page::where('type',$data->type)->where('id','<>',$id)->take(5)->get();
         // dd($others);
