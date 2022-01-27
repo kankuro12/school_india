@@ -114,14 +114,18 @@
 @section('script')
     <script>
         const url = "{{ route('page', ['id' => 'xxx_id']) }}";
+        const eventurl = "{{ route('event', ['id' => 'xxx_id']) }}";
         const pages = {!! json_encode($pages) !!};
+        const events = {!! json_encode($events) !!};
         const menus = {!! json_encode($menus) !!};
         const header_menu_template = $('#header-menu-template').html();
         const normal_menu_template = $('#normal-menu-template').html();
         const options = [
             @foreach (\App\Data::pageTypes as $key => $pageType)
                 ["{{ route('page.type', ['type' => $key]) }}","{{ $pageType[1] }}"],
-            @endforeach['{{ route('home') }}', "Home"],
+            @endforeach
+            ['{{ route('home') }}', "Home"],
+            ['{{ route('events') }}', "Events"],
         ]
         $(function() {
             let arr = [];
@@ -280,7 +284,17 @@
                     $('#extra-links').attr('required', 'required');
 
                     break;
-
+                case "4":
+                    alert('adfsd');
+                    $('#links').attr('required', 'required');
+                    $('#link-wrapper').removeClass('d-none');
+                    html = '';
+                    events.forEach(page => {
+                        html += "<option value='" + (eventurl.replace('xxx_id', page.id)) + "'>" +
+                            page.title + "</option>"
+                    });
+                    $('#links').html(html);
+                    break;
                 default:
                     $('#links').attr('required', 'required');
                     $('#link-wrapper').removeClass('d-none');

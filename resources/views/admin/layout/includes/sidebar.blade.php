@@ -15,7 +15,7 @@
             @foreach (\App\Data::pageTypes as $key=>$pagetype)
             <li >
                 <a href="#">
-                    <i class="material-icons">settings</i>
+                    <i class="material-icons">space_dashboard</i>
                     {{$pagetype[1]}}
                     <i class="material-icons has-sub-menu">add</i>
                 </a>
@@ -30,7 +30,22 @@
                 </ul>
             </li>
             @endforeach
-
+            <li >
+                <a href="#">
+                    <i class="material-icons">event</i>
+                    Events
+                    <i class="material-icons has-sub-menu">add</i>
+                </a>
+                <ul class="sub-menu">
+                    <li class="sub-item">
+                        <a  href="{{route('admin.event.add')}}" >Add Event</a>
+                    </li>
+                    <li class="sub-item">
+                        <a  href="{{route('admin.event.index')}}" >List Events</a>
+                    </li>
+                  
+                </ul>
+            </li>
             <li >
                 <a href="#">
                     <i class="material-icons">settings</i>

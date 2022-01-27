@@ -31,6 +31,7 @@
                                     @foreach (\App\Data::pageTypes as $key => $pageType)
                                         <option value="{{ $key }}">{{ $pageType[1] }}</option>
                                     @endforeach
+                                    <option value="4">Event</option>
                                     <option value="2">Other Link</option>
                                     <option value="3">Custom Link</option>
                                 </select>
