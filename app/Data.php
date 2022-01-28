@@ -58,10 +58,11 @@ class Data
             'msg_4'=>'Long Message',
         ],true,null,true,'Message'],
         'prog'=>['Program','Programs',[
+            'prog_05'=>'About',
             'prog_01'=>'Fee Structre',
             'prog_02'=>'Lab',
             'prog_03'=>'Scholorship Scheme',
-            'prog_04'=>'Achivements'
+            'prog_04'=>'Achivements',
         ],true,'gallery|multiple|Gallery',true,'Description'],
         'club'=>['Club','Clubs',[],true,'gallery|multiple|Gallery',true,'Description']
     ];
