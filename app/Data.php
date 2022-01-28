@@ -56,12 +56,13 @@ class Data
             'msg_2'=>'Person Designaton|text',
             'msg_3'=>'Person contact|text',
             'msg_4'=>'Long Message',
+            'msg_4'=>'info',
         ],true,null,true,'Message'],
         'prog'=>['Program','Programs',[
             'prog_05'=>'About',
             'prog_01'=>'Fee Structre',
             'prog_02'=>'Lab',
-            'prog_03'=>'Scholorship Scheme',
+            // 'prog_03'=>'Scholorship Scheme',
             'prog_04'=>'Achivements',
         ],true,'gallery|multiple|Gallery',true,'Description'],
         'club'=>['Club','Clubs',[],true,'gallery|multiple|Gallery',true,'Description']

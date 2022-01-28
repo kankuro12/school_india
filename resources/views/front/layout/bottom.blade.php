@@ -32,6 +32,10 @@
             <a href="http://192.168.254.151:8000/page/6">About Us</a>
         </span>
         
+                            <span class="nav-item">
+            <a href="http://192.168.254.151:8000/gallery/2">gallery</a>
+        </span>
+        
                             <div class="dropdown nav-item">
             <button class="btn btn-secondary dropdown-toggle p-0" type="button" id="menu-18"
               data-bs-toggle="dropdown" aria-expanded="false">
