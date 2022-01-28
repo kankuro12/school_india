@@ -17,11 +17,16 @@
                             Latest Notices
                         </div>
                         @foreach ($notices as $notice)
-                            
-                        <a href="{{route('page',['id'=>$notice->id])}}" class="notice">
-                            {{$notice->title}}
-                            <span class="more">View More</span>
-                        </a>
+                        <div class="notice">
+                            <span class="date">
+                                <span class="day">{{$notice->updated_at->format('jS')}}</span>
+                                <span class="month">{{$notice->updated_at->format('M')}}</span>
+                            </span>
+                            <a href="{{route('page',['id'=>$notice->id])}}" >
+                                {{$notice->title}}
+                                <span class="more">View More</span>
+                            </a>
+                        </div>
                         @endforeach
                         
                     </div>
@@ -117,8 +122,10 @@
                     
                     <div class="col-md-4">
                         <a class="event " href="{{route('event',['id'=>$event->id])}}">
-                            <img src="{{asset($event->image)}}"
-                                alt="">
+                            <div class="image">
+                                <img src="{{asset($event->image)}}"
+                                    alt="">
+                            </div>
                             <div class="event-desc">
                                 <div class="date">
 
@@ -164,8 +171,11 @@
                     
                 <div class="col-md-4">
                     <a class="event " href="{{route('page',['id'=>$singleNews->id])}}">
-                        <img src="{{asset($singleNews->image)}}"
+                        <div class="image">
+
+                            <img src="{{asset($singleNews->image)}}"
                             alt="">
+                        </div>
                         <div class="event-desc">
                             <div class="d-flex justify-content-between mb-2 text-grey">
                                 <small>{{$singleNews->created_at->format('jS M, y')}}</small>

@@ -115,8 +115,10 @@
     <script>
         const url = "{{ route('page', ['id' => 'xxx_id']) }}";
         const eventurl = "{{ route('event', ['id' => 'xxx_id']) }}";
+        const galleryurl = "{{ route('gallery', ['id' => 'xxx_id']) }}";
         const pages = {!! json_encode($pages) !!};
         const events = {!! json_encode($events) !!};
+        const galleries = {!! json_encode($galleries) !!};
         const menus = {!! json_encode($menus) !!};
         const header_menu_template = $('#header-menu-template').html();
         const normal_menu_template = $('#normal-menu-template').html();
@@ -126,6 +128,7 @@
             @endforeach
             ['{{ route('home') }}', "Home"],
             ['{{ route('events') }}', "Events"],
+            ['{{ route('gallery.type') }}', "Galleries"],
         ]
         $(function() {
             let arr = [];
@@ -284,8 +287,17 @@
                     $('#extra-links').attr('required', 'required');
 
                     break;
+                case "5":
+                    $('#links').attr('required', 'required');
+                    $('#link-wrapper').removeClass('d-none');
+                    html = '';
+                    galleries.forEach(page => {
+                        html += "<option value='" + (galleryurl.replace('xxx_id', page.id)) + "'>" +
+                            page.name + "</option>"
+                    });
+                    $('#links').html(html);
+                    break;
                 case "4":
-                    alert('adfsd');
                     $('#links').attr('required', 'required');
                     $('#link-wrapper').removeClass('d-none');
                     html = '';
@@ -332,7 +344,26 @@
                     $('#eextra-links').attr('required', 'required');
 
                     break;
-
+                case "5":
+                    $('#elinks').attr('required', 'required');
+                    $('#elink-wrapper').removeClass('d-none');
+                    html = '';
+                    galleries.forEach(page => {
+                        html += "<option value='" + (galleryurl.replace('xxx_id', page.id)) + "'>" +
+                            page.name + "</option>"
+                    });
+                    $('#elinks').html(html);
+                    break;
+                case "4":
+                    $('#elinks').attr('required', 'required');
+                    $('#elink-wrapper').removeClass('d-none');
+                    html = '';
+                    events.forEach(page => {
+                        html += "<option value='" + (eventurl.replace('xxx_id', page.id)) + "'>" +
+                            page.title + "</option>"
+                    });
+                    $('#elinks').html(html);
+                    break;
                 default:
                     $('#elinks').attr('required', 'required');
                     $('#elink-wrapper').removeClass('d-none');

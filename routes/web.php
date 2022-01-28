@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\EventController;
 use App\Http\Controllers\Admin\ExamController;
 use App\Http\Controllers\Admin\ExamSubjectController;
 use App\Http\Controllers\Admin\FooterController;
+use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\LevelController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\PageController;
@@ -41,6 +42,9 @@ Route::get('',[HomeController::class,'index'])->name('home');
 Route::get('image',[HomeController::class,'image'])->name('image');
 Route::get('page/@{type}',[HomeController::class,'pageType'])->name('page.type');
 Route::get('page/{id}',[HomeController::class,'page'])->name('page');
+
+Route::get('galleries',[HomeController::class,'galleryType'])->name('gallery.type');
+Route::get('gallery/{id}',[HomeController::class,'gallery'])->name('gallery');
 
 Route::get('events',[HomeController::class,'events'])->name('events');
 Route::get('event/{id}',[HomeController::class,'event'])->name('event');
@@ -89,6 +93,21 @@ Route::prefix('admin')->name('admin.')->group(function(){
                 Route::match(['get', 'post'],'edit/{slider}',[SliderController::class,'edit'])->name('edit');
                 Route::match(['get', 'post'],'del/{slider}',[SliderController::class,'del'])->name('del');
             });
+
+            Route::prefix('gallery')->name('gallery.')->group(function(){
+                Route::prefix('type')->name('type.')->group(function(){
+                    Route::get('',[ GalleryController::class,'indexType'])->name('index');
+                    Route::match(['get', 'post'],'add',[ GalleryController::class,'addType'])->name('add');
+                    Route::match(['get', 'post'],'edit/{type}',[ GalleryController::class,'editType'])->name('edit');
+                    Route::match(['get', 'post'],'del/{type}',[ GalleryController::class,'delType'])->name('del');
+                });
+
+                Route::get('manage/{type}',[ GalleryController::class,'index'])->name('index');
+                Route::match(['get', 'post'],'add',[ GalleryController::class,'add'])->name('add');
+                Route::match(['get', 'post'],'edit/{gallery}',[ GalleryController::class,'edit'])->name('edit');
+                Route::match(['get', 'post'],'del/{gallery}',[ GalleryController::class,'del'])->name('del');
+            });
+            
 
             Route::prefix('footer')->name('footer.')->group(function(){
                 Route::match(['GET','POST'],'',[FooterController::class,'index'])->name('index');

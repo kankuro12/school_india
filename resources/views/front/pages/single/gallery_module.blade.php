@@ -18,6 +18,15 @@
 <script>
     const galleryelem = document.querySelectorAll('.gallery .item img');
     var index=0;
+    function imageChanged() {
+        let ele=$('#modal-image-holder>img');
+        let height=ele.height();
+        let wh=window.innerHeight;
+        console.log(height,wh);
+        if(height>wh){
+            ele.height(wh-100);
+        }
+    }
     $(document).ready(function() {
         lazy.init('.gallery .item>img');
         $('#modal-image-holder>img').attr('src', galleryelem[index].src);
@@ -30,6 +39,10 @@
             console.log(index, galleryelem[index]);
             $('#modal-image-holder>img').attr('src', galleryelem[index].src);
             $('#staticBackdrop').modal('show');
+            imageChanged();
+        });
+        $('#staticBackdrop')[0].addEventListener('shown.bs.modal', function (event) {
+            imageChanged();
         });
 
         $('#modal-image-holder>.next').click(function(e) {
@@ -39,6 +52,7 @@
                 index = 0;
             }
             $('#modal-image-holder>img').attr('src', galleryelem[index].src);
+            imageChanged();
 
         });
         $('#modal-image-holder>.prev').click(function(e) {
@@ -48,6 +62,7 @@
                 index = galleryelem.length - 1;
             }
             $('#modal-image-holder>img').attr('src', galleryelem[index].src);
+            imageChanged();
 
         });
     });

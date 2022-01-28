@@ -37,6 +37,13 @@ class Data
 
     ];
 
+    const iconmap=[
+        ['Facebook'=> ""],
+        ['Twitter'=> 1],
+        ['Instagram'=> 1],
+        ['Youtube'=> 1],
+        ['LinkedIN'=> 1],
+    ];
     const pageTypes=[
         'dept'=>['Department','Departments',[],false,null,true,'Description'],
         'about'=>['About Us','About Us',[],false,null,true,'Description'],

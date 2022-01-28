@@ -11,7 +11,13 @@
 
             </li>
 
-            
+            <li>
+                <a href="{{route('admin.setting.gallery.type.index')}}">
+                    <i class="material-icons">collections</i>
+                    Gallery
+                </a>
+
+            </li>
             @foreach (\App\Data::pageTypes as $key=>$pagetype)
             <li >
                 <a href="#">
@@ -67,6 +73,9 @@
                     </li>
                     <li class="sub-item">
                         <a  href="{{route('admin.setting.footer.index')}}" >Footer</a>
+                    </li>
+                    <li class="sub-item">
+                        <a  href="{{route('admin.setting.index',['type'=>'social'])}}" >Social Links</a>
                     </li>
                 </ul>
             </li>

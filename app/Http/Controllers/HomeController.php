@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Data;
 use App\Models\Event;
+use App\Models\Gallery;
+use App\Models\GalleryType;
 use App\Models\Page;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -22,7 +24,7 @@ class HomeController extends Controller
         $facilities=Page::where('type','fac')->take(4)->latest()->get(['id','title','short_desc','image']);
         $programs=Page::where('type','prog')->latest()->get(['id','title','short_desc','image']);
         $events=Event::where('end','>=',Carbon::now()->format('Y-m-d'))->select(['id','title','short_desc','addr','start','end','start_time','end_time','image'])->get();
-        $notices=Page::where('type','not')->latest()->take(8)->get(['id','title']);
+        $notices=Page::where('type','not')->latest()->take(8)->get(['id','title','updated_at']);
         // dd(Carbon::now()->format('Y-m-d'),$events);
         return view('front.pages.home',compact('notices','setting','abouts','programs','facilities','events','news'));
     }
@@ -81,5 +83,13 @@ class HomeController extends Controller
         $others=Event::where('id','<>',$id)->latest()->take(5)->get();
         // dd($data);
         return view('front.pages.single.event',compact('data','others'));
+    }
+
+    public function gallery($id)
+    {
+        $type=GalleryType::find($id);
+        $images=Gallery::where('gallery_type_id',$id)->get();
+        return view('front.pages.single.gallery',compact('images','type'));
+
     }
 }

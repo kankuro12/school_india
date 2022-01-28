@@ -63,10 +63,10 @@
                 <div class="gallery">
                   @foreach ($data->files as $file)
                       
-                  @endforeach 
                   <div class="item" data-index="{{$i++}}">
                     <img src="{{asset('uploads/setting/logo.jpg')}}" data-src="{{asset($file->file)}}" alt="">
                   </div>
+                  @endforeach 
                 </div>
               </div>
               @endif
